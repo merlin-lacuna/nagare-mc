@@ -1,0 +1,83 @@
+---
+import SubPageLayout from "../layouts/SubPageLayout.astro";
+---
+
+<SubPageLayout title="Services">
+  <p class="page-intro">I can help you with…</p>
+
+  <section class="service">
+    <h2>Content creation</h2>
+    <p>
+      Content creation is my specialty. I can produce both high-level thought
+      leadership pieces and low-level technical tutorials (and the code to go
+      along with it). This includes multimedia content such as demo videos,
+      podcasts, and diagrams. Check out my portfolio to get to know my content
+      style.
+    </p>
+  </section>
+
+  <section class="service">
+    <h2>Content planning</h2>
+    <p>
+      Unsure of what content themes to focus on? Developer-centric themes are
+      often too niche to show up on conventional SEO tools. I can help you use
+      alternative techniques such as topic modelling, social listening, and text
+      mining on user forums to surface the themes that resonate the most with
+      the types of developer that you want to reach.
+    </p>
+  </section>
+
+  <section class="service">
+    <h2>DX copywriting and design</h2>
+    <p>
+      The user interface is only a small part of DX (Developer Experience). It's
+      also about error messages, documentation, API design, function naming and
+      a whole lot more. I can help you design the ideal experience for
+      developers.
+    </p>
+  </section>
+
+  <p class="contact-line">
+    <strong>Contact:</strong>
+    <a href="mailto:merlin@merlincarter.com">merlin@merlincarter.com</a>
+  </p>
+</SubPageLayout>
+
+<style>
+  .page-intro {
+    font-size: 1.6rem;
+    color: var(--text-color);
+    margin-bottom: 3rem;
+    max-width: 70ch;
+    font-weight: 500;
+  }
+
+  .service {
+    margin-bottom: 3rem;
+    max-width: 70ch;
+  }
+
+  .service h2 {
+    font-size: 1.6rem;
+    font-weight: 600;
+    margin: 0 0 0.6rem;
+    color: var(--text-color);
+  }
+
+  .service p {
+    font-size: 1.15rem;
+    line-height: 1.65;
+    margin: 0;
+    color: var(--text-muted);
+  }
+
+  .contact-line {
+    margin-top: 3rem;
+    font-size: 1.05rem;
+    color: var(--text-color);
+  }
+
+  .contact-line a {
+    color: var(--text-color);
+  }
+</style>

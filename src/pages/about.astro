@@ -1,0 +1,89 @@
+---
+import SubPageLayout from "../layouts/SubPageLayout.astro";
+---
+
+<SubPageLayout title="About">
+  <p class="lede">
+    I'm a versatile content creator with over 15 years experience in technical
+    communication.
+  </p>
+
+  <div class="about-body">
+    <p>
+      I started my career as an editor for a major search engine (back when
+      humans edited the results) before making detours through online advertising
+      technology and product management. While studying fine art at Berlin's
+      Universität der Künste, I worked part-time as a UX writer, localization
+      specialist, and technical author. After graduating, I cut my teeth writing
+      developer documentation and technical tutorials using a docs-as-code
+      approach. I worked as a technical writer for many years while retaining my
+      practice as a multimedia artist and creative coder.
+    </p>
+
+    <p>
+      These days, I've slowly crossed over into technical content marketing and
+      am just as comfortable ghostwriting a think piece for a CTO as I am
+      writing a tutorial for a new Python library. Although I've never been a
+      professional developer, I'm no stranger to coding. Through my passion for
+      net and media art, I taught myself to code while working on various art
+      projects — mostly Python, but some Node.js (I haven't entirely given up on
+      learning C#).
+    </p>
+
+    <p>
+      Thanks to the machine learning craze, my strongest coding language is
+      Python. After many years working for a software company that dealt in
+      computational linguistics, I became fascinated with natural language
+      processing, and later large language models. Ever since the release of
+      RNNs and later GPT-2 I've been poking and prodding at the limitations of
+      LLMs and have used LLMs in various art projects, such as fine-tuning GPT-2
+      to generate artist statements for grant applications.
+    </p>
+
+    <p>
+      But naturally, my professional writing is all 100% me. Nowadays, my AI
+      tinkering isn't restricted to LLMs, and I'm currently trying to learn
+      ComfyUI and master offline image generation with local models. I'm a big
+      proponent of running your own models, be it Stable Diffusion, LLama-2, or
+      Whisper. I enjoy getting my hands dirty with the underlying technology and
+      tweaking it to my creative requirements.
+    </p>
+  </div>
+
+  <p class="contact-line">
+    <strong>Contact:</strong>
+    <a href="mailto:merlin@merlincarter.com">merlin@merlincarter.com</a>
+  </p>
+</SubPageLayout>
+
+<style>
+  .lede {
+    font-size: 1.6rem;
+    line-height: 1.4;
+    font-weight: 500;
+    color: var(--text-color);
+    margin: 0 0 2.5rem;
+    max-width: 70ch;
+  }
+
+  .about-body {
+    max-width: 70ch;
+  }
+
+  .about-body p {
+    font-size: 1.15rem;
+    line-height: 1.7;
+    color: var(--text-muted);
+    margin: 0 0 1.5rem;
+  }
+
+  .contact-line {
+    margin-top: 3rem;
+    font-size: 1.05rem;
+    color: var(--text-color);
+  }
+
+  .contact-line a {
+    color: var(--text-color);
+  }
+</style>

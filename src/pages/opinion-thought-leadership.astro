@@ -1,0 +1,11 @@
+---
+import SubPageLayout from "../layouts/SubPageLayout.astro";
+import ProjectGrid from "../components/projects/ProjectGrid.astro";
+import { projectsByCategory } from "../data/projectsData";
+
+const items = projectsByCategory("opinion");
+---
+
+<SubPageLayout title="Opinion & Thought Leadership">
+  <ProjectGrid projects={items} />
+</SubPageLayout>

@@ -1,0 +1,11 @@
+---
+import SubPageLayout from "../layouts/SubPageLayout.astro";
+import ProjectGrid from "../components/projects/ProjectGrid.astro";
+import { projectsByCategory } from "../data/projectsData";
+
+const items = projectsByCategory("tutorial");
+---
+
+<SubPageLayout title="Tutorials & Demos">
+  <ProjectGrid projects={items} />
+</SubPageLayout>

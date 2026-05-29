@@ -3,6 +3,7 @@ import { ClientRouter } from "astro:transitions";
 import DynamicBackground from "../components/DynamicBackground.astro";
 import ScrollIndicator from "../components/ScrollIndicator.astro";
 import Footer from "../components/Footer.astro";
+import Nav from "../components/Nav.astro";
 
 interface Props {
   title?: string;
@@ -350,6 +351,7 @@ const showScrollIndicator =
   <body>
     <div class="page-wrapper">
       <DynamicBackground />
+      <Nav />
       <main class="main-content">
         <slot />
       </main>

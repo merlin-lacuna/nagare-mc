@@ -1,0 +1,396 @@
+---
+const currentPath = Astro.url.pathname;
+
+const portfolioItems = [
+  { href: "/portfolio", label: "Portfolio Home" },
+  { href: "/tutorials", label: "Tutorials & Demos" },
+  { href: "/case-studies", label: "Case Studies & Announcements" },
+  { href: "/comparisons", label: "Comparisons" },
+  { href: "/best-practices", label: "Best Practices" },
+  { href: "/opinion-thought-leadership", label: "Opinion & Thought Leadership" },
+  { href: "/ebooks", label: "Ebooks" },
+];
+
+const isPortfolioActive = portfolioItems.some((i) => currentPath === i.href);
+
+function isActive(href: string) {
+  if (href === "/") return currentPath === "/";
+  return currentPath === href;
+}
+---
+
+<div class="nav-sentinel" aria-hidden="true"></div>
+<nav class="site-nav" aria-label="Primary">
+  <div class="nav-inner">
+    <a href="/" class="nav-brand" data-astro-prefetch>Merlin Carter</a>
+
+    <ul class="nav-list">
+      <li class="nav-item nav-item--has-dropdown">
+        <button
+          type="button"
+          class:list={["nav-link", "nav-dropdown-trigger", isPortfolioActive && "active"]}
+          aria-expanded="false"
+          aria-haspopup="true"
+          aria-controls="portfolio-dropdown"
+          data-dropdown="portfolio"
+        >
+          Portfolio
+          <svg
+            class="nav-caret"
+            viewBox="0 0 12 12"
+            aria-hidden="true"
+            focusable="false"
+          >
+            <path
+              d="M2.5 4.5 L6 8 L9.5 4.5"
+              fill="none"
+              stroke="currentColor"
+              stroke-width="1.5"
+              stroke-linecap="round"
+              stroke-linejoin="round"></path>
+          </svg>
+        </button>
+        <div class="nav-dropdown" id="portfolio-dropdown" hidden>
+          <ul class="nav-dropdown-list">
+            {
+              portfolioItems.map((item) => (
+                <li>
+                  <a
+                    href={item.href}
+                    class:list={["nav-dropdown-link", isActive(item.href) && "active"]}
+                    data-astro-prefetch
+                  >
+                    {item.label}
+                  </a>
+                </li>
+              ))
+            }
+          </ul>
+        </div>
+      </li>
+      <li class="nav-item">
+        <a
+          href="/services"
+          class:list={["nav-link", isActive("/services") && "active"]}
+          data-astro-prefetch>Services</a
+        >
+      </li>
+      <li class="nav-item">
+        <a
+          href="/about"
+          class:list={["nav-link", isActive("/about") && "active"]}
+          data-astro-prefetch>About</a
+        >
+      </li>
+      <li class="nav-item">
+        <a
+          href="/contact"
+          class:list={["nav-link", isActive("/contact") && "active"]}
+          data-astro-prefetch>Contact</a
+        >
+      </li>
+    </ul>
+  </div>
+</nav>
+
+<style>
+  .nav-sentinel {
+    height: 1px;
+    margin-bottom: -1px;
+    pointer-events: none;
+  }
+
+  .site-nav {
+    position: sticky;
+    top: 0;
+    z-index: 100;
+    background-color: transparent;
+    border-bottom: 1px solid var(--button-border-color);
+    font-family: var(--font-family-sans);
+    transition:
+      background-color 0.25s ease,
+      backdrop-filter 0.25s ease,
+      -webkit-backdrop-filter 0.25s ease;
+  }
+
+  .site-nav.scrolled {
+    background-color: color-mix(in srgb, var(--bg-color) 50%, transparent);
+    backdrop-filter: saturate(180%) blur(14px);
+    -webkit-backdrop-filter: saturate(180%) blur(14px);
+  }
+
+  .nav-inner {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 1.5rem;
+    padding: 0.85rem 5vw;
+  }
+
+  @media (min-width: 768px) {
+    .nav-inner {
+      padding: 0.9rem 10vw;
+    }
+  }
+
+  .nav-brand {
+    font-weight: 600;
+    font-size: 1.05rem;
+    color: var(--text-color);
+    text-decoration: none;
+    letter-spacing: -0.01em;
+    white-space: nowrap;
+  }
+
+  .nav-brand:hover,
+  .nav-brand:focus {
+    text-decoration: none;
+    color: var(--link-hover-color);
+  }
+
+  .nav-list {
+    display: flex;
+    align-items: center;
+    gap: 0.15rem;
+    list-style: none;
+    margin: 0;
+    padding: 0;
+  }
+
+  .nav-item {
+    position: relative;
+  }
+
+  .nav-link {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.35rem;
+    padding: 0.5rem 0.85rem;
+    color: var(--text-color);
+    text-decoration: none;
+    font-size: 0.95rem;
+    background: none;
+    border: none;
+    border-radius: 6px;
+    cursor: pointer;
+    font-family: inherit;
+    line-height: 1;
+    transition:
+      background-color 0.18s ease,
+      color 0.18s ease;
+  }
+
+  .nav-link:hover,
+  .nav-link:focus-visible,
+  .nav-link.active {
+    background-color: var(--button-hover-bg);
+    color: var(--button-hover-text);
+    text-decoration: none;
+  }
+
+  .nav-caret {
+    width: 0.7em;
+    height: 0.7em;
+    transition: transform 0.18s ease;
+  }
+
+  .nav-dropdown-trigger[aria-expanded="true"] .nav-caret {
+    transform: rotate(180deg);
+  }
+
+  .nav-dropdown {
+    position: absolute;
+    top: calc(100% + 0.4rem);
+    left: 0;
+    min-width: 17rem;
+    background-color: var(--bg-color);
+    border: 1px solid var(--button-border-color);
+    border-radius: 10px;
+    padding: 0.4rem;
+    box-shadow: 0 8px 24px rgba(0, 0, 0, 0.08);
+  }
+
+  .nav-dropdown::before {
+    content: "";
+    position: absolute;
+    top: -0.5rem;
+    left: 0;
+    right: 0;
+    height: 0.5rem;
+  }
+
+  html.dark .nav-dropdown {
+    box-shadow: 0 8px 24px rgba(0, 0, 0, 0.4);
+  }
+
+  .nav-dropdown[hidden] {
+    display: none;
+  }
+
+  .nav-dropdown-list {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+  }
+
+  .nav-dropdown-link {
+    display: block;
+    padding: 0.5rem 0.75rem;
+    color: var(--text-color);
+    text-decoration: none;
+    border-radius: 6px;
+    font-size: 0.9rem;
+    white-space: nowrap;
+    transition: background-color 0.18s ease;
+  }
+
+  .nav-dropdown-link:hover,
+  .nav-dropdown-link:focus-visible,
+  .nav-dropdown-link.active {
+    background-color: var(--button-hover-bg);
+    color: var(--button-hover-text);
+    text-decoration: none;
+  }
+
+  @media (max-width: 640px) {
+    .nav-inner {
+      padding: 0.75rem 4vw;
+      gap: 0.5rem;
+    }
+    .nav-brand {
+      font-size: 0.95rem;
+    }
+    .nav-link {
+      padding: 0.45rem 0.55rem;
+      font-size: 0.85rem;
+    }
+    .nav-dropdown {
+      left: auto;
+      right: 0;
+      min-width: 15rem;
+    }
+  }
+</style>
+
+<script>
+  type DropdownEntry = {
+    trigger: HTMLButtonElement;
+    dropdown: HTMLElement;
+    parent: Element | null;
+  };
+
+  let entries: DropdownEntry[] = [];
+  let documentListenersAttached = false;
+  let scrollObserver: IntersectionObserver | null = null;
+  const closeTimers = new WeakMap<HTMLButtonElement, number>();
+  const HOVER_CLOSE_DELAY = 150;
+
+  function closeEntry(entry: DropdownEntry) {
+    entry.dropdown.hidden = true;
+    entry.trigger.setAttribute("aria-expanded", "false");
+  }
+
+  function openEntry(entry: DropdownEntry) {
+    entry.dropdown.hidden = false;
+    entry.trigger.setAttribute("aria-expanded", "true");
+  }
+
+  function cancelClose(entry: DropdownEntry) {
+    const timer = closeTimers.get(entry.trigger);
+    if (timer !== undefined) {
+      clearTimeout(timer);
+      closeTimers.delete(entry.trigger);
+    }
+  }
+
+  function scheduleClose(entry: DropdownEntry) {
+    cancelClose(entry);
+    const timer = window.setTimeout(() => {
+      closeEntry(entry);
+      closeTimers.delete(entry.trigger);
+    }, HOVER_CLOSE_DELAY);
+    closeTimers.set(entry.trigger, timer);
+  }
+
+  function closeAll() {
+    entries.forEach((entry) => {
+      cancelClose(entry);
+      closeEntry(entry);
+    });
+  }
+
+  function setupNav() {
+    entries = [];
+
+    const triggers = document.querySelectorAll<HTMLButtonElement>("[data-dropdown]");
+    triggers.forEach((trigger) => {
+      const name = trigger.dataset.dropdown;
+      if (!name) return;
+      const dropdown = document.getElementById(`${name}-dropdown`);
+      if (!dropdown) return;
+
+      const entry: DropdownEntry = {
+        trigger,
+        dropdown,
+        parent: trigger.closest(".nav-item"),
+      };
+      entries.push(entry);
+
+      trigger.addEventListener("click", (e) => {
+        e.stopPropagation();
+        const expanded = trigger.getAttribute("aria-expanded") === "true";
+        closeAll();
+        if (!expanded) openEntry(entry);
+      });
+
+      if (entry.parent) {
+        entry.parent.addEventListener("mouseenter", () => {
+          cancelClose(entry);
+          openEntry(entry);
+        });
+        entry.parent.addEventListener("mouseleave", () => scheduleClose(entry));
+      }
+    });
+
+    const sentinel = document.querySelector(".nav-sentinel");
+    const nav = document.querySelector(".site-nav");
+    const scrollRoot = document.querySelector(".page-wrapper");
+    if (scrollObserver) {
+      scrollObserver.disconnect();
+      scrollObserver = null;
+    }
+    if (sentinel && nav && scrollRoot) {
+      scrollObserver = new IntersectionObserver(
+        ([entry]) => {
+          if (entry.isIntersecting) {
+            nav.classList.remove("scrolled");
+          } else {
+            nav.classList.add("scrolled");
+          }
+        },
+        { root: scrollRoot, threshold: 0 },
+      );
+      scrollObserver.observe(sentinel);
+    }
+
+    if (!documentListenersAttached) {
+      document.addEventListener("click", (e) => {
+        const target = e.target as Node;
+        entries.forEach((entry) => {
+          if (
+            !entry.trigger.contains(target) &&
+            !entry.dropdown.contains(target)
+          ) {
+            closeEntry(entry);
+          }
+        });
+      });
+      document.addEventListener("keydown", (e) => {
+        if (e.key === "Escape") closeAll();
+      });
+      documentListenersAttached = true;
+    }
+  }
+
+  document.addEventListener("astro:page-load", setupNav);
+</script>

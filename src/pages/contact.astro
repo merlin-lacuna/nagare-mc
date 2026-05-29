@@ -1,99 +1,328 @@
 ---
 import SubPageLayout from "../layouts/SubPageLayout.astro";
-import { Icon } from "astro-icon/components";
+
+// Placeholder — swap this for the real Formspree form ID
+const FORMSPREE_ENDPOINT = "https://formspree.io/f/YOUR_FORMSPREE_ID";
 ---
 
-<SubPageLayout title="Contact">
-  <div class="contact-content">
-    <p class="intro-text">Feel free to reach out!</p>
-    <p class="intro-text">Here's some description about how to contact me.</p>
+<SubPageLayout title="Let's connect.">
+  <p class="lede">
+    If you have a project where developer experience is crucial, get in touch,
+    and let's start a conversation.
+  </p>
 
-    <h3 class="contact-section-title">Contact Information</h3>
-    <p class="section-description">This is a list of my contact information.</p>
-    <ul class="contact-list">
-      <li>
-        <Icon name="ri:mail-line" class="contact-icon" />
-        <a href="javascript:alert('link to your email')">example@example.com</a>
-      </li>
-      <li>
-        <Icon name="ri:github-line" class="contact-icon" />
-        <a href="javascript:alert('link to your github')">github.com/example</a>
-      </li>
-      <li>
-        <Icon name="ri:planet-line" class="contact-icon" />
-        <a href="javascript:alert('link to your website')">example.com</a>
-      </li>
-    </ul>
-  </div>
+  <form
+    class="contact-form"
+    method="POST"
+    action={FORMSPREE_ENDPOINT}
+    data-formspree
+    novalidate
+  >
+    <div class="form-row two-col">
+      <div class="field">
+        <label for="first-name">First name <span class="req">*</span></label>
+        <input
+          id="first-name"
+          name="first-name"
+          type="text"
+          autocomplete="given-name"
+          required
+        />
+      </div>
+      <div class="field">
+        <label for="last-name">Last name <span class="req">*</span></label>
+        <input
+          id="last-name"
+          name="last-name"
+          type="text"
+          autocomplete="family-name"
+          required
+        />
+      </div>
+    </div>
+
+    <div class="field">
+      <label for="email">Email <span class="req">*</span></label>
+      <input
+        id="email"
+        name="email"
+        type="email"
+        autocomplete="email"
+        required
+      />
+    </div>
+
+    <div class="field">
+      <label for="message">Message <span class="req">*</span></label>
+      <textarea id="message" name="message" rows="6" required></textarea>
+    </div>
+
+    <input
+      type="text"
+      name="_gotcha"
+      tabindex="-1"
+      autocomplete="off"
+      class="honeypot"
+      aria-hidden="true"
+    />
+
+    <div class="form-actions">
+      <button type="submit" class="send-button">
+        <span class="send-label">Send</span>
+        <span class="send-spinner" aria-hidden="true"></span>
+      </button>
+    </div>
+
+    <p class="form-status" role="status" aria-live="polite" hidden></p>
+  </form>
 </SubPageLayout>
 
+<script>
+  function setupContactForm() {
+    const form = document.querySelector<HTMLFormElement>("form[data-formspree]");
+    if (!form) return;
+
+    const status = form.querySelector<HTMLParagraphElement>(".form-status");
+    const button = form.querySelector<HTMLButtonElement>(".send-button");
+
+    function showStatus(message: string, kind: "success" | "error") {
+      if (!status) return;
+      status.textContent = message;
+      status.dataset.kind = kind;
+      status.hidden = false;
+    }
+
+    function clearStatus() {
+      if (!status) return;
+      status.textContent = "";
+      status.hidden = true;
+      delete status.dataset.kind;
+    }
+
+    form.addEventListener("submit", async (e) => {
+      e.preventDefault();
+      clearStatus();
+
+      if (!form.checkValidity()) {
+        form.reportValidity();
+        return;
+      }
+
+      const endpoint = form.action;
+      if (endpoint.includes("YOUR_FORMSPREE_ID")) {
+        showStatus(
+          "Form not configured yet — Formspree ID hasn't been set.",
+          "error"
+        );
+        return;
+      }
+
+      if (button) {
+        button.disabled = true;
+        button.dataset.loading = "true";
+      }
+
+      try {
+        const response = await fetch(endpoint, {
+          method: "POST",
+          body: new FormData(form),
+          headers: { Accept: "application/json" },
+        });
+
+        if (response.ok) {
+          form.reset();
+          showStatus(
+            "Thanks — your message is on its way. I'll get back to you soon.",
+            "success"
+          );
+        } else {
+          const data = await response.json().catch(() => null);
+          const detail =
+            data?.errors?.map((e: { message: string }) => e.message).join(", ") ||
+            "Something went wrong. Please try again, or email me directly.";
+          showStatus(detail, "error");
+        }
+      } catch {
+        showStatus(
+          "Couldn't reach the form service. Please try again, or email me directly.",
+          "error"
+        );
+      } finally {
+        if (button) {
+          button.disabled = false;
+          delete button.dataset.loading;
+        }
+      }
+    });
+  }
+
+  document.addEventListener("astro:page-load", setupContactForm);
+</script>
+
 <style>
-  .contact-content {
-    max-width: 600px;
+  .lede {
+    font-size: 1.6rem;
+    line-height: 1.4;
+    font-weight: 500;
+    color: var(--text-color);
+    margin: 0 0 2.5rem;
+    max-width: 60ch;
   }
 
-  .intro-text {
-    margin-bottom: 1rem;
-    font-size: 1.2em;
-    line-height: 1.7;
-    color: var(--text-muted);
+  .contact-form {
+    max-width: 42rem;
+    font-family: var(--font-family-sans);
   }
 
-  .contact-section-title {
-    font-size: 1.4rem;
-    font-weight: 600;
-    margin-top: 3rem;
-    margin-bottom: 0.5rem;
-    color: var(--text-heading-color);
+  .form-row.two-col {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 1.25rem;
   }
 
-  .section-description {
-    font-size: 1.2rem;
-    color: var(--text-muted);
-    margin-bottom: 1.5rem;
-    line-height: 1.6;
+  @media (min-width: 600px) {
+    .form-row.two-col {
+      grid-template-columns: 1fr 1fr;
+    }
   }
 
-  .contact-list {
-    list-style: none;
-    padding-left: 0;
-    margin: 0;
-    line-height: 1.9;
-  }
-  .contact-list li {
-    margin-bottom: 1.2rem;
+  .field {
     display: flex;
-    align-items: flex-start;
-    font-size: 1.1rem;
-  }
-  .contact-icon {
-    margin-right: 1em;
-    font-size: 1.3em;
-    flex-shrink: 0;
-    opacity: 0.9;
-    color: var(--icon-color);
-    margin-top: 0.3em;
+    flex-direction: column;
+    gap: 0.4rem;
+    margin-bottom: 1.25rem;
   }
 
-  .contact-list a,
-  .contact-list span {
-    word-break: break-all;
+  .form-row.two-col .field {
+    margin-bottom: 0;
   }
 
-  .contact-list a {
-    color: var(--link-color);
-    text-decoration: none;
-    transition: color 0.3s ease;
-  }
-  .contact-list a:hover {
-    color: var(--link-hover-color);
-    text-decoration: underline;
+  label {
+    font-size: 0.9rem;
+    color: var(--text-color);
+    font-weight: 500;
   }
 
-  .section-divider {
-    border: 0;
+  .req {
+    color: var(--text-muted);
+    font-weight: 400;
+  }
+
+  input,
+  textarea {
+    font: inherit;
+    font-size: 1rem;
+    padding: 0.65rem 0.85rem;
+    background-color: color-mix(in srgb, var(--bg-color) 60%, transparent);
+    color: var(--text-color);
+    border: 1px solid var(--button-border-color);
+    border-radius: 8px;
+    transition:
+      border-color 0.18s ease,
+      background-color 0.18s ease,
+      box-shadow 0.18s ease;
+  }
+
+  input:focus,
+  textarea:focus {
+    outline: none;
+    border-color: var(--button-border-hover-color);
+    background-color: var(--bg-color);
+    box-shadow: 0 0 0 3px color-mix(in srgb, var(--button-border-hover-color) 25%, transparent);
+  }
+
+  textarea {
+    resize: vertical;
+    min-height: 8rem;
+    line-height: 1.5;
+  }
+
+  .honeypot {
+    position: absolute;
+    left: -9999px;
+    width: 1px;
     height: 1px;
-    background: var(--button-border-color);
-    margin: 3rem 0;
+    opacity: 0;
+    pointer-events: none;
+  }
+
+  .form-actions {
+    margin-top: 1.75rem;
+  }
+
+  .send-button {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 0.5rem;
+    padding: 0.7em 1.6em;
+    border: 1px solid var(--button-border-color);
+    color: var(--text-muted);
+    background-color: transparent;
+    border-radius: 8px;
+    font-family: var(--font-family-sans);
+    font-size: 0.95rem;
+    cursor: pointer;
+    transition: all 0.2s ease;
+    line-height: 1.4;
+  }
+
+  .send-button:hover:not(:disabled) {
+    border-color: var(--button-border-hover-color);
+    background-color: var(--button-hover-bg);
+    color: var(--button-hover-text);
+  }
+
+  .send-button:disabled {
+    cursor: progress;
+    opacity: 0.7;
+  }
+
+  .send-spinner {
+    display: none;
+    width: 0.9em;
+    height: 0.9em;
+    border: 2px solid currentColor;
+    border-right-color: transparent;
+    border-radius: 50%;
+    animation: send-spin 0.7s linear infinite;
+  }
+
+  .send-button[data-loading="true"] .send-spinner {
+    display: inline-block;
+  }
+
+  .send-button[data-loading="true"] .send-label::after {
+    content: "ing…";
+  }
+
+  @keyframes send-spin {
+    to {
+      transform: rotate(360deg);
+    }
+  }
+
+  .form-status {
+    margin-top: 1.5rem;
+    padding: 0.75rem 1rem;
+    border-radius: 8px;
+    font-size: 0.95rem;
+    line-height: 1.5;
+    border: 1px solid var(--button-border-color);
+    background-color: color-mix(in srgb, var(--bg-color) 60%, transparent);
+  }
+
+  .form-status[data-kind="success"] {
+    border-color: color-mix(in srgb, currentColor 30%, var(--button-border-color));
+  }
+
+  .form-status[data-kind="error"] {
+    border-color: color-mix(in srgb, #c0392b 50%, var(--button-border-color));
+    color: #c0392b;
+  }
+
+  html.dark .form-status[data-kind="error"] {
+    color: #ff7a6b;
+    border-color: color-mix(in srgb, #ff7a6b 40%, var(--button-border-color));
   }
 </style>

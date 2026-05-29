@@ -1,0 +1,11 @@
+---
+import SubPageLayout from "../layouts/SubPageLayout.astro";
+import ProjectGrid from "../components/projects/ProjectGrid.astro";
+import { projectsByCategory } from "../data/projectsData";
+
+const items = projectsByCategory("best-practice");
+---
+
+<SubPageLayout title="Best Practices">
+  <ProjectGrid projects={items} />
+</SubPageLayout>

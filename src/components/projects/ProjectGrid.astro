@@ -1,0 +1,75 @@
+---
+import ProjectCard from "./ProjectCard.astro";
+import type { ProjectDataItem } from "../../data/projectsData";
+
+interface Props {
+  projects: ProjectDataItem[];
+  emptyMessage?: string;
+}
+
+const { projects, emptyMessage = "Coming soon." } = Astro.props;
+
+function slugify(text: string): string {
+  return text
+    .toString()
+    .toLowerCase()
+    .replace(/\s+/g, "-")
+    .replace(/[^\w-]+/g, "")
+    .replace(/--+/g, "-")
+    .replace(/^-+/, "")
+    .replace(/-+$/, "");
+}
+---
+
+{
+  projects.length === 0 ? (
+    <p class="empty-state">{emptyMessage}</p>
+  ) : (
+    <div class="projects-grid">
+      {projects.map((project) => {
+        const slug = slugify(project.title);
+        return (
+          <ProjectCard
+            id={slug}
+            title={project.title}
+            timeframe={project.timeframe}
+            imageSrc={project.imageSrc}
+            imageAlt={project.imageAlt}
+            githubUrl={project.githubUrl}
+            projectUrl={project.projectUrl}
+            githubRepos={project.githubRepos}
+            techStack={project.techStack}
+          >
+            <div set:html={project.description} />
+          </ProjectCard>
+        );
+      })}
+    </div>
+  )
+}
+
+<style>
+  .empty-state {
+    font-size: 1.2rem;
+    color: var(--text-muted);
+    max-width: 70ch;
+  }
+
+  .projects-grid {
+    column-count: 1;
+    column-gap: 3rem;
+    gap: 3rem;
+  }
+
+  @media (min-width: 1024px) {
+    .projects-grid {
+      column-count: 2;
+      column-gap: 3rem;
+      gap: 3rem;
+    }
+  }
+
+  .projects-grid > :global(.project-card) {
+    break-inside: avoid;
+  }
+</style>

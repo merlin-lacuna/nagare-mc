@@ -1,0 +1,59 @@
+---
+import SubPageLayout from "../layouts/SubPageLayout.astro";
+import ProjectGrid from "../components/projects/ProjectGrid.astro";
+import { allProjectsData } from "../data/projectsData";
+---
+
+<SubPageLayout title="Portfolio">
+  <p class="page-intro">
+    Here are some of the projects I've worked on. You can find more details and
+    other experiments on my GitHub profiles.
+  </p>
+  <ProjectGrid projects={allProjectsData} />
+</SubPageLayout>
+
+<script>
+  import { gsap } from "gsap";
+  import { ScrollToPlugin } from "gsap/ScrollToPlugin";
+
+  gsap.registerPlugin(ScrollToPlugin);
+
+  function smoothScrollToTarget() {
+    const params = new URLSearchParams(window.location.search);
+    const targetId = params.get("scrollTo");
+
+    if (!targetId) return;
+
+    setTimeout(() => {
+      const targetElement = document.getElementById(targetId);
+      const pageWrapperElement = document.querySelector(
+        ".page-wrapper"
+      ) as HTMLElement | null;
+
+      if (targetElement && pageWrapperElement) {
+        gsap.to(pageWrapperElement, {
+          duration: 1,
+          scrollTo: { y: targetElement.offsetTop },
+          ease: "power4.out",
+        });
+      }
+
+      try {
+        history.replaceState(null, "", window.location.pathname);
+      } catch {
+        // ignore
+      }
+    }, 100);
+  }
+
+  document.addEventListener("astro:page-load", smoothScrollToTarget);
+</script>
+
+<style>
+  .page-intro {
+    font-size: 1.2rem;
+    color: var(--text-muted);
+    margin-bottom: 3rem;
+    max-width: 70ch;
+  }
+</style>
