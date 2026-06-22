@@ -1,0 +1,152 @@
+---
+// src/components/resume/Talks.astro
+import { Icon } from "astro-icon/components";
+
+const entries = [
+  {
+    title: "Knowledgebase Ninjas Podcast",
+    venue: "Document360 podcast (early episode)",
+    date: "",
+    url: "https://podcasts.apple.com/us/podcast/interconnectivity-great-documentation-with-merlin/id1496613504?i=1000483484937",
+    description:
+      "Participated in an early episode of this vendor-run podcast, giving my views on how technical documentation should not be a siloed function.",
+  },
+  {
+    title: "Powering Vector Search with Real-Time Data",
+    venue: "Quix · Developer Voices",
+    date: "~April 2025",
+    url: "https://www.youtube.com/watch?v=9pG1pspgELU",
+    description:
+      "Co-presented with Zain Hasan (Developer Advocate, Weaviate), hosted by Kris Jenkins (Developer Voices). Live RAG and vector search using real-time transcription into Weaviate, with a companion CDC-to-Weaviate code template repo built alongside the talk.",
+  },
+  {
+    title: "Build an industrial data pipeline using AI and MCP servers",
+    venue: "Quix",
+    date: "~June 2025",
+    url: "https://www.youtube.com/watch?v=Y6QBakE9zB8",
+    description:
+      "Early public experiment with Model Context Protocol for agentic construction of industrial data pipelines — published during the first wave of MCP adoption.",
+  },
+  {
+    title: "Watch an AI build an industrial data pipeline from a sketch",
+    venue: "Quix",
+    date: "~June 2025",
+    url: "https://www.youtube.com/watch?v=P9vVQPJ_bRU",
+    description:
+      "Demo of agentic pipeline construction from a sketch as input. The experimental work that led directly to the development of Klaus Kode.",
+  },
+  {
+    title: "Using AI to map OPC UA data by making it read a signal manual",
+    venue: "Quix",
+    date: "~June 2025",
+    url: "https://www.youtube.com/watch?v=uwGAgv-KWwo",
+    description:
+      "Demo of LLM-assisted parsing of an industrial signal reference manual to auto-map OPC UA data streams. I explored a similar problem pattern later in the Distil Labs article on fine-tuning SLMs for industrial documentation RAG.",
+  },
+  {
+    title: "Real-Time Python Aggregations with WarpStream",
+    venue: "Quix",
+    date: "August 2024",
+    url: "https://www.youtube.com/watch?v=RuiweYsnkt0",
+    description:
+      "A walkthrough of the Quix integration with WarpStream — part of an ongoing campaign to ally with technical partners (WarpStream has since been purchased by Confluent).",
+  },
+  {
+    title: "Quix repositioning — industrial launch video",
+    venue: "Quix",
+    date: "April 2025",
+    url: "https://www.youtube.com/watch?v=kux4Q-56d8M",
+    description:
+      "Cut and edited the animated launch video for Quix's industrial repositioning. Designed to be the flagship video that ran on autoplay on the Quix YouTube channel.",
+  },
+];
+---
+
+<section class="resume-section scroll-reveal-animate">
+  <h2>Talks, Video &amp; Multimedia</h2>
+
+  {
+    entries.map((entry) => (
+      <article class="talk-entry">
+        <div class="header">
+          <h3 class="talk-title">{entry.title}</h3>
+          {entry.date && <span class="date">{entry.date}</span>}
+        </div>
+        <p class="meta">
+          <a href={entry.url} target="_blank" rel="noopener noreferrer">
+            <Icon name="ri:play-circle-line" /> {entry.venue}
+          </a>
+        </p>
+        <p class="description">{entry.description}</p>
+      </article>
+    ))
+  }
+</section>
+
+<style>
+  .resume-section {
+    margin-bottom: 4rem;
+  }
+  h2 {
+    font-size: clamp(1.8rem, 1.5rem + 1.5vw, 2.8rem);
+    margin-bottom: 2rem;
+    font-weight: 600;
+    border-bottom: 1px solid var(--text-muted);
+    padding-bottom: 0.5rem;
+  }
+  .talk-entry {
+    margin-bottom: 2.2rem;
+  }
+  .talk-entry:last-child {
+    margin-bottom: 0;
+  }
+  .header {
+    display: flex;
+    justify-content: space-between;
+    align-items: baseline;
+    flex-wrap: wrap;
+    gap: 0.4rem 1rem;
+    margin-bottom: 0.3rem;
+  }
+  .talk-title {
+    margin: 0;
+    font-size: 1.15rem;
+    font-weight: 600;
+    line-height: 1.3;
+    flex: 1 1 60%;
+  }
+  .date {
+    font-family: var(--font-family-sans);
+    color: var(--text-muted);
+    font-size: 0.95rem;
+    white-space: nowrap;
+  }
+  .meta {
+    font-family: var(--font-family-sans);
+    font-size: 0.95rem;
+    margin: 0 0 0.5rem;
+    color: var(--text-muted);
+  }
+  .meta a {
+    color: var(--text-muted);
+    text-decoration: none;
+    display: inline-flex;
+    align-items: center;
+    gap: 0.35em;
+  }
+  .meta a:hover {
+    color: var(--link-hover-color);
+    text-decoration: underline;
+  }
+  .description {
+    font-size: 1.05rem;
+    line-height: 1.6;
+    margin: 0;
+  }
+  @media (max-width: 600px) {
+    .header {
+      flex-direction: column;
+      align-items: flex-start;
+    }
+  }
+</style>

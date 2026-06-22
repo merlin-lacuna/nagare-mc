@@ -1,11 +1,14 @@
 ---
+import { getCollection } from "astro:content";
 import SubPageLayout from "../layouts/SubPageLayout.astro";
 import ProjectGrid from "../components/projects/ProjectGrid.astro";
-import { projectsByCategory } from "../data/projectsData";
 
-const items = projectsByCategory("tutorial");
+const entries = await getCollection(
+  "portfolio",
+  (e) => e.data.category === "tutorial"
+);
 ---
 
 <SubPageLayout title="Tutorials & Demos">
-  <ProjectGrid projects={items} />
+  <ProjectGrid entries={entries} />
 </SubPageLayout>

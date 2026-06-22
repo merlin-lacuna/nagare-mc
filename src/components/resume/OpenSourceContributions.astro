@@ -1,0 +1,135 @@
+---
+// src/components/resume/OpenSourceContributions.astro
+import { Icon } from "astro-icon/components";
+
+const entries = [
+  {
+    project: "LangChain",
+    ref: "langchain-ai/langchain #16771",
+    url: "https://github.com/langchain-ai/langchain/pull/16771",
+    description:
+      "A cookbook notebook demonstrating how to manage LangChain chat messages via Apache Kafka, proposing an architecture where the chat frontend and LLM run as separate services communicating over an internal network (a deliberate alternative to the typical REST API pattern).",
+  },
+  {
+    project: "InfluxDB",
+    ref: "influxdata/docs-v2 #5342",
+    url: "https://github.com/influxdata/docs-v2/pull/5342",
+    description:
+      "A downsampling tutorial for InfluxDB Cloud Serverless using Python tumbling windows, positioned as a pure-Python alternative to the existing SQL/InfluxQL approach and as a Pythonic replacement for the Kapacitor+Flux/TICKscript toolchain. Merged into InfluxDB's own docs site.",
+  },
+  {
+    project: "Upstash",
+    ref: "upstash/upstash-web #229",
+    url: "https://github.com/upstash/upstash-web/pull/229",
+    description:
+      "A full technical blog post on building a CDC pipeline from PostgreSQL to Upstash Vector via Upstash Kafka and Python. It covered change data capture, real-time streaming, and vector database upserts for AI applications.",
+  },
+  {
+    project: "Aiven",
+    ref: "aiven/aiven-docs #173",
+    url: "https://github.com/aiven/aiven-docs/pull/173",
+    description:
+      "Step-by-step integration guide for connecting Aiven Kafka as a broker to Quix, with screenshots and sidebar navigation updates.",
+  },
+  {
+    project: "Upstash",
+    ref: "upstash/docs #151",
+    url: "https://github.com/upstash/docs/pull/151",
+    description:
+      "Integration guide for using Upstash Kafka as a broker with Quix, with screenshots and navigation config.",
+  },
+];
+---
+
+<section class="resume-section scroll-reveal-animate">
+  <h2>Open-Source Documentation Contributions</h2>
+
+  <p class="intro">
+    The contributions below were made when my main customer, Quix, was trying to
+    forge relationships in the open-source ecosystem (until this approach was
+    abandoned by the founder). I gently deflected his urges to aggressively
+    self-promote and encouraged him to let me try to provide legitimate value to
+    the affected communities.
+  </p>
+
+  {
+    entries.map((entry) => (
+      <article class="contrib-entry">
+        <div class="header">
+          <h3 class="project">{entry.project}</h3>
+          <a
+            class="ref"
+            href={entry.url}
+            target="_blank"
+            rel="noopener noreferrer"
+          >
+            <Icon name="ri:github-line" /> {entry.ref}
+          </a>
+        </div>
+        <p class="description">{entry.description}</p>
+      </article>
+    ))
+  }
+</section>
+
+<style>
+  .resume-section {
+    margin-bottom: 4rem;
+  }
+  h2 {
+    font-size: clamp(1.8rem, 1.5rem + 1.5vw, 2.8rem);
+    margin-bottom: 2rem;
+    font-weight: 600;
+    border-bottom: 1px solid var(--text-muted);
+    padding-bottom: 0.5rem;
+  }
+  .intro {
+    font-size: 1.05rem;
+    line-height: 1.6;
+    margin: 0 0 2rem;
+    color: var(--text-muted);
+  }
+  .contrib-entry {
+    margin-bottom: 1.8rem;
+  }
+  .contrib-entry:last-child {
+    margin-bottom: 0;
+  }
+  .header {
+    display: flex;
+    justify-content: space-between;
+    align-items: baseline;
+    flex-wrap: wrap;
+    gap: 0.4rem 1rem;
+    margin-bottom: 0.4rem;
+  }
+  .project {
+    margin: 0;
+    font-size: 1.15rem;
+    font-weight: 600;
+  }
+  .ref {
+    font-family: var(--font-family-sans);
+    font-size: 0.9rem;
+    color: var(--text-muted);
+    text-decoration: none;
+    display: inline-flex;
+    align-items: center;
+    gap: 0.3em;
+  }
+  .ref:hover {
+    color: var(--link-hover-color);
+    text-decoration: underline;
+  }
+  .description {
+    font-size: 1.05rem;
+    line-height: 1.6;
+    margin: 0;
+  }
+  @media (max-width: 600px) {
+    .header {
+      flex-direction: column;
+      align-items: flex-start;
+    }
+  }
+</style>

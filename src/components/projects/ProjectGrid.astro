@@ -1,49 +1,47 @@
 ---
+import { render, type CollectionEntry } from "astro:content";
 import ProjectCard from "./ProjectCard.astro";
-import type { ProjectDataItem } from "../../data/projectsData";
 
 interface Props {
-  projects: ProjectDataItem[];
+  entries: CollectionEntry<"portfolio">[];
   emptyMessage?: string;
 }
 
-const { projects, emptyMessage = "Coming soon." } = Astro.props;
+const { entries, emptyMessage = "Coming soon." } = Astro.props;
 
-function slugify(text: string): string {
-  return text
-    .toString()
-    .toLowerCase()
-    .replace(/\s+/g, "-")
-    .replace(/[^\w-]+/g, "")
-    .replace(/--+/g, "-")
-    .replace(/^-+/, "")
-    .replace(/-+$/, "");
-}
+const sorted = [...entries].sort((a, b) => {
+  const ad = a.data.date ? new Date(a.data.date).getTime() : -Infinity;
+  const bd = b.data.date ? new Date(b.data.date).getTime() : -Infinity;
+  return bd - ad;
+});
+
+const rendered = await Promise.all(
+  sorted.map(async (entry) => {
+    const { Content } = await render(entry);
+    return { entry, Content };
+  })
+);
 ---
 
 {
-  projects.length === 0 ? (
+  rendered.length === 0 ? (
     <p class="empty-state">{emptyMessage}</p>
   ) : (
     <div class="projects-grid">
-      {projects.map((project) => {
-        const slug = slugify(project.title);
-        return (
-          <ProjectCard
-            id={slug}
-            title={project.title}
-            timeframe={project.timeframe}
-            imageSrc={project.imageSrc}
-            imageAlt={project.imageAlt}
-            githubUrl={project.githubUrl}
-            projectUrl={project.projectUrl}
-            githubRepos={project.githubRepos}
-            techStack={project.techStack}
-          >
-            <div set:html={project.description} />
-          </ProjectCard>
-        );
-      })}
+      {rendered.map(({ entry, Content }) => (
+        <ProjectCard
+          id={entry.id}
+          title={entry.data.title}
+          timeframe={entry.data.timeframe}
+          imageSrc={entry.data.imageSrc}
+          imageAlt={entry.data.imageAlt}
+          githubUrl={entry.data.githubUrl}
+          projectUrl={entry.data.projectUrl}
+          techStack={entry.data.techStack}
+        >
+          <Content />
+        </ProjectCard>
+      ))}
     </div>
   )
 }

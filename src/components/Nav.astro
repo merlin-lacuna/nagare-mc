@@ -84,6 +84,13 @@ function isActive(href: string) {
       </li>
       <li class="nav-item">
         <a
+          href="/resume"
+          class:list={["nav-link", isActive("/resume") && "active"]}
+          data-astro-prefetch>Curriculum Vitae</a
+        >
+      </li>
+      <li class="nav-item">
+        <a
           href="/contact"
           class:list={["nav-link", isActive("/contact") && "active"]}
           data-astro-prefetch>Contact</a

@@ -1,7 +1,9 @@
 ---
+import { getCollection } from "astro:content";
 import SubPageLayout from "../layouts/SubPageLayout.astro";
 import ProjectGrid from "../components/projects/ProjectGrid.astro";
-import { allProjectsData } from "../data/projectsData";
+
+const entries = await getCollection("portfolio");
 ---
 
 <SubPageLayout title="Portfolio">
@@ -9,7 +11,7 @@ import { allProjectsData } from "../data/projectsData";
     Here are some of the projects I've worked on. You can find more details and
     other experiments on my GitHub profiles.
   </p>
-  <ProjectGrid projects={allProjectsData} />
+  <ProjectGrid entries={entries} />
 </SubPageLayout>
 
 <script>

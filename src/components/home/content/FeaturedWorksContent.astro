@@ -1,44 +1,28 @@
 ---
-import {
-  allProjectsData,
-  type ProjectDataItem,
-} from "../../../data/projectsData";
-import FeaturedProjectCard from "../FeaturedProjectCard.astro"; // Import the new card component
+import { getCollection } from "astro:content";
+import FeaturedProjectCard from "../FeaturedProjectCard.astro";
 import Button from "../../common/Button.astro";
 
-const featuredProjects: ProjectDataItem[] = allProjectsData.filter(
-  (project) => project.isFeatured
+const featuredProjects = await getCollection(
+  "portfolio",
+  (e) => e.data.isFeatured === true
 );
 const projectsUrl = "/portfolio";
-
-function slugify(text: string): string {
-  return text
-    .toString()
-    .toLowerCase()
-    .replace(/\s+/g, "-") // Replace spaces with -
-    .replace(/[^\w-]+/g, "") // Remove all non-word chars (removed \ before -)
-    .replace(/--+/g, "-") // Replace multiple - with single - (removed \ before -)
-    .replace(/^-+/, "") // Trim - from start of text
-    .replace(/-+$/, ""); // Trim - from end of text
-}
 ---
 
 <h2 slot="title" class="about-title scroll-target-title">Featured Works</h2>
 
 <div class="about-content scroll-target-content featured-works-container">
   {
-    featuredProjects.map((project) => {
-      const slug = slugify(project.title);
-      return (
-        <FeaturedProjectCard
-          title={project.title}
-          homepageSummary={project.homepageSummary}
-          imageAlt={project.imageAlt}
-          githubUrl={project.githubUrl}
-          slug={slug}
-        />
-      );
-    })
+    featuredProjects.map((entry) => (
+      <FeaturedProjectCard
+        title={entry.data.title}
+        homepageSummary={entry.data.homepageSummary}
+        imageAlt={entry.data.imageAlt}
+        githubUrl={entry.data.githubUrl}
+        slug={entry.id}
+      />
+    ))
   }
 
   <div class="button-group">

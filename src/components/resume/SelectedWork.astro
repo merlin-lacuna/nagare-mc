@@ -1,0 +1,140 @@
+---
+// src/components/resume/SelectedWork.astro
+import { Icon } from "astro-icon/components";
+
+const entries = [
+  {
+    title: "Fine-tuning an SLM for on-device industrial RAG",
+    date: "March 2026",
+    url: "https://www.distillabs.ai/blog/how-slms-can-enable-on-device-rag--making-industrial-machinery-more-usable/",
+    description:
+      "I pitched and wrote an article explaining how Small Language Models (SLM) could be useful for question answering in the security-conscious industrial domain. In the process of testing it, I uncovered and reported several product issues.",
+  },
+  {
+    title: "Klaus Kode — an agentic data integrator built on Claude Code",
+    date: "September 2025",
+    url: "https://github.com/quixio/klaus-kode-agentic-integrator",
+    description:
+      "Designed, built, and documented an open-source agentic tool for building streaming data pipelines using the Quix platform. I was trying to encourage my main customer, Quix, to incorporate an AI-coding assistant into their platform (since their users were mechanical engineers rather than software engineers). This was an early prototype built on top of the Claude Code SDK. Quix has since started incorporating AI agents directly into the web UI of portal.cloud.quix.io.",
+  },
+  {
+    title: "Guide to the Event-Driven, Event Streaming Stack",
+    date: "August 2023",
+    url: "https://drive.google.com/file/d/1wV-3QgJBOdGqWCqczr_dRXv-n32lUutL/view",
+    description:
+      "A long-form technical guide covering the full EDA component landscape (event buses, pub/sub, message queues, event streaming, stream processing, event stores), with cloud-native and open-source paths for each component. The idea was to provide objective value to readers without pushing the Quix platform specifically.",
+  },
+  {
+    title: "What's the best way to manage Helm charts?",
+    date: "May 2020",
+    url: "https://medium.com/@Project-A.Tech.Insights/whats-the-best-way-to-manage-helm-charts-1cbf2614ec40",
+    secondaryUrl:
+      "https://drive.google.com/file/d/1mW9q3xNbiLEwU49Ze7UTpv5ZdnZJQ6Eb/view?usp=drive_link",
+    secondaryLabel: "Full PDF",
+    description:
+      "Best-practices article proposed by my team lead, stemming from debate at one of the portfolio companies. I interviewed the affected developers and identified that the best practice was just as much of a human issue as it was a process issue. The article accrued traffic quickly after publishing — seemed to touch a nerve at the time.",
+  },
+];
+---
+
+<section class="resume-section scroll-reveal-animate">
+  <h2>Selected Work</h2>
+
+  {
+    entries.map((entry) => (
+      <article class="work-entry">
+        <div class="header">
+          <h3 class="work-title">{entry.title}</h3>
+          <span class="date">{entry.date}</span>
+        </div>
+        <p class="links">
+          <a href={entry.url} target="_blank" rel="noopener noreferrer">
+            <Icon name="ri:external-link-line" />{" "}
+            {new URL(entry.url).hostname.replace(/^www\./, "")}
+          </a>
+          {entry.secondaryUrl && (
+            <>
+              {" · "}
+              <a
+                href={entry.secondaryUrl}
+                target="_blank"
+                rel="noopener noreferrer"
+              >
+                <Icon name="ri:file-line" /> {entry.secondaryLabel}
+              </a>
+            </>
+          )}
+        </p>
+        <p class="description">{entry.description}</p>
+      </article>
+    ))
+  }
+</section>
+
+<style>
+  .resume-section {
+    margin-bottom: 4rem;
+  }
+  h2 {
+    font-size: clamp(1.8rem, 1.5rem + 1.5vw, 2.8rem);
+    margin-bottom: 2rem;
+    font-weight: 600;
+    border-bottom: 1px solid var(--text-muted);
+    padding-bottom: 0.5rem;
+  }
+  .work-entry {
+    margin-bottom: 2.5rem;
+  }
+  .work-entry:last-child {
+    margin-bottom: 0;
+  }
+  .header {
+    display: flex;
+    justify-content: space-between;
+    align-items: baseline;
+    flex-wrap: wrap;
+    gap: 0.4rem 1rem;
+    margin-bottom: 0.4rem;
+  }
+  .work-title {
+    margin: 0;
+    font-size: 1.2rem;
+    font-weight: 600;
+    line-height: 1.3;
+    flex: 1 1 60%;
+  }
+  .date {
+    font-family: var(--font-family-sans);
+    color: var(--text-muted);
+    font-size: 0.95rem;
+    white-space: nowrap;
+  }
+  .links {
+    font-family: var(--font-family-sans);
+    font-size: 0.95rem;
+    margin: 0 0 0.6rem;
+    color: var(--text-muted);
+  }
+  .links a {
+    color: var(--text-muted);
+    text-decoration: none;
+    display: inline-flex;
+    align-items: center;
+    gap: 0.3em;
+  }
+  .links a:hover {
+    color: var(--link-hover-color);
+    text-decoration: underline;
+  }
+  .description {
+    font-size: 1.05rem;
+    line-height: 1.6;
+    margin: 0;
+  }
+  @media (max-width: 600px) {
+    .header {
+      flex-direction: column;
+      align-items: flex-start;
+    }
+  }
+</style>

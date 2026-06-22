@@ -1,24 +1,20 @@
 ---
-// No props needed for now
+// src/components/resume/Education.astro
 ---
 
 <section class="resume-section scroll-reveal-animate">
   <h2>Education</h2>
+
   <div class="education-entry">
-    <div class="header">
-      <span class="institution"
-        ><strong>Example University</strong><br /> B.S. in Computer Science, <br
-        />
-        <em>Third-year Undergraduate</em></span
-      >
-      <span class="date">September 2022 – Present</span>
-    </div>
-    <p>
-      GPA: <strong>3.8</strong> &emsp; <wbr /> Average Score: <strong
-        >92.5</strong
-      > &emsp; <wbr />
-      Major Rank: <strong>Top 10%</strong>
-    </p>
+    <div class="degree">Meisterschüler, Fine Art (sculpture)</div>
+    <div class="institution">Universität der Künste Berlin</div>
+    <div class="date">2009 – 2015</div>
+  </div>
+
+  <div class="education-entry">
+    <div class="degree">B.Comm., Multimedia Publishing</div>
+    <div class="institution">AUT University, Auckland</div>
+    <div class="date">1995 – 1998</div>
   </div>
 </section>
 
@@ -27,50 +23,34 @@
     margin-bottom: 4rem;
   }
   h2 {
-    font-size: clamp(1.8rem, 1.5rem + 1.5vw, 2.8rem);
-    margin-bottom: 2rem;
+    font-size: clamp(1.4rem, 1.2rem + 1vw, 2rem);
+    margin-bottom: 1.5rem;
     font-weight: 600;
     border-bottom: 1px solid var(--text-muted);
     padding-bottom: 0.5rem;
   }
-  .education-entry .header {
-    display: flex;
-    justify-content: space-between;
-    align-items: baseline;
-    flex-wrap: wrap; /* Allow wrapping on smaller screens */
-    margin-bottom: 0.8rem;
-    font-size: 1.2rem;
+  .education-entry {
+    margin-bottom: 1.25rem;
   }
-  .education-entry .institution {
-    margin-right: 1rem; /* Space between institution and date */
+  .education-entry:last-child {
+    margin-bottom: 0;
   }
-  .education-entry .date {
-    font-family: var(--font-family-sans);
-    color: var(--text-muted);
+  .degree {
     font-size: 1rem;
-    white-space: nowrap; /* Prevent date from wrapping */
+    font-weight: 600;
+    line-height: 1.35;
+    margin-bottom: 0.15rem;
   }
-  .education-entry .details {
-    list-style: none;
-    padding-left: 0;
-    margin-left: 1rem; /* Indent details slightly */
-    font-size: 1.1rem;
-    line-height: 1.6;
+  .institution {
+    font-family: var(--font-family-sans);
+    font-size: 0.95rem;
+    color: var(--text-muted);
+    line-height: 1.4;
   }
-  .education-entry .details li {
-    margin-bottom: 0.3rem;
-  }
-
-  @media (max-width: 600px) {
-    .education-entry .header {
-      flex-direction: column; /* Stack header items vertically */
-      align-items: flex-start;
-    }
-    .education-entry .date {
-      margin-top: 0.3rem;
-    }
-    .education-entry .details {
-      margin-left: 0; /* Remove indent on mobile */
-    }
+  .date {
+    font-family: var(--font-family-sans);
+    font-size: 0.85rem;
+    color: var(--text-muted);
+    margin-top: 0.15rem;
   }
 </style>
