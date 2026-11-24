@@ -1,0 +1,756 @@
+<!DOCTYPE html><!-- Last Published: Mon Jun 15 2026 14:58:26 GMT+0000 (Coordinated Universal Time) --><html data-wf-domain="prod.quix.io" data-wf-page="65e594cb4c2cdd89ca8b06d7" data-wf-site="64872dd3805a32626f4c2952" lang="en" data-wf-collection="65e594cb4c2cdd89ca8b0701" data-wf-item-slug="bridging-the-impedance-gap"><head><base target="_top"><meta charset="utf-8"/><link href="https://cdn.prod.website-files.com" rel="preconnect" crossorigin="anonymous"/><title>Bridging the gap between data scientists and engineers in machine learning workflows</title><meta content="Moving code from prototype to production can be tricky—especially for data scientists. There are many challenges in deploying code that needs to calculate features for ML models in real-time. I look at potential solutions to ease the friction." name="description"/><meta content="Bridging the gap between data scientists and engineers in machine learning workflows" property="og:title"/><meta content="Moving code from prototype to production can be tricky—especially for data scientists. There are many challenges in deploying code that needs to calculate features for ML models in real-time. I look at potential solutions to ease the friction." property="og:description"/><meta content="https://cdn.prod.website-files.com/64a7eed956ba9b9a3c62401d/64a8024b769f033c11b565a5_Illustration-of%20two-people-in-the-desert.webp" property="og:image"/><meta content="Bridging the gap between data scientists and engineers in machine learning workflows" name="twitter:title"/><meta content="Moving code from prototype to production can be tricky—especially for data scientists. There are many challenges in deploying code that needs to calculate features for ML models in real-time. I look at potential solutions to ease the friction." name="twitter:description"/><meta content="https://cdn.prod.website-files.com/64a7eed956ba9b9a3c62401d/64a8024b769f033c11b565a5_Illustration-of%20two-people-in-the-desert.webp" name="twitter:image"/><meta property="og:type" content="website"/><meta content="summary_large_image" name="twitter:card"/><meta content="width=device-width, initial-scale=1" name="viewport"/><link href="/portfolio/article-copies/_assets/quix-2023.webflow.shared.a97fc2d49.min-5054cd7254.css" rel="stylesheet" type="text/css" crossorigin="anonymous"/><script type="text/javascript">!function(o,c){var n=c.documentElement,t=" w-mod-";n.className+=t+"js",("ontouchstart"in o||o.DocumentTouch&&c instanceof DocumentTouch)&&(n.className+=t+"touch")}(window,document);</script><link href="/portfolio/article-copies/_assets/690b178f563998c8b6596cc2_Quix_favicon-2025-ba49a2ec11.jpg" rel="shortcut icon" type="image/x-icon"/><link href="/portfolio/article-copies/_assets/690b17536c60cede196d70c1_Quix_webclip-2025-f384c15e22.jpg" rel="apple-touch-icon"/><link href="https://quix.io/blog/bridging-the-impedance-gap" rel="canonical"/><script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "BlogPosting",
+  "mainEntityOfPage": {
+    "@type": "WebPage",
+    "@id": "https://quix.io/blog/bridging-the-impedance-gap"
+  },
+  "headline": "Bridging the gap between data scientists and engineers in machine learning workflows",
+  "description": "Moving code from prototype to production can be tricky—especially for data scientists. There are many challenges in deploying code that needs to calculate features for ML models in real-time. I look at potential solutions to ease the friction.",
+  "image": [
+    "https://cdn.prod.website-files.com/64a7eed956ba9b9a3c62401d/64a8024b769f033c11b565a5_Illustration-of%20two-people-in-the-desert.webp"
+  ],
+  "author": {
+    "@type": "Person",
+    "name": "Mike Rosam"
+  },
+  "publisher": {
+    "@type": "Organization",
+    "name": "Quix",
+    "url": "https://quix.io",
+    "logo": {
+      "@type": "ImageObject",
+      "url": "https://quix.io/quix-logo.svg"
+    }
+  },
+  "datePublished": "2024-11-19T10:12:27.919Z",
+  "dateModified": "2024-04-11T10:43:31.980Z",
+  "articleSection": "Industry insights"
+}
+</script><link href="rss.xml" rel="alternate" title="RSS Feed" type="application/rss+xml"/><!-- Cookiebot -->
+
+<!-- /Cookiebot -->
+
+<script src="/portfolio/article-copies/_assets/script-ce6c5cb5ea.js" data-public-api-key="2430a118-75df-4cd3-9b20-a4501681891d"></script>
+
+<!-- Google Tag Manager -->
+
+<!-- /Google Tag Manager -->
+
+
+
+<!-- Reddit Pixel -->
+
+<!-- DO NOT MODIFY UNLESS TO REPLACE A USER IDENTIFIER -->
+<!-- End Reddit Pixel --><!-- [Attributes by Finsweet] Code Highlight -->
+<script async src="/portfolio/article-copies/_assets/codehighlight-886dd8aecd.js"></script>
+<script defer src="/portfolio/article-copies/_assets/toc-e058c73812.js"></script>
+<script defer src="/portfolio/article-copies/_assets/socialshare-7c4b4845ad.js"></script>
+<script async src="/portfolio/article-copies/_assets/cmsprevnext-731f3490d7.js"></script>
+<!-- [Attributes by Finsweet] Powerful Rich Text -->
+<script defer src="/portfolio/article-copies/_assets/richtext-d701999d0b.js"></script>
+
+<style>
+/* Default Background */
+.c-rich-content.w-code-block {
+  background: var(--deep-blue-black) !important;
+}
+/* Default White Color
+.c-rich-content span {
+  color: var(--white-smoke) !important;
+}
+*/
+
+/* Default Tan Color (Comments) */
+.c-rich-content span[style="color:#d4d0ab"] {
+  color: var(--grey-300) !important;
+}
+/* Default Gold Color */
+.c-rich-content span[style="color:#f5ab35"] {
+  color: var(--light-orange) !important;
+}
+/* Default Green Color */
+.c-rich-content span[style="color:#abe338"] {
+  color: var(--electric-green) !important;
+}
+/* Default Purple Color */
+.c-rich-content span[style="color:#dcc6e0"] {
+  color: var(--lighter-blue) !important;
+}
+
+pre {
+	padding: 0.25rem !important;
+  border-radius: 0.25rem !important;
+}
+
+pre code.hljs {
+  display: block;
+  background: var(--deep-blue-black) !important;
+}
+
+code.hljs {
+  display: inline;
+  border-radius: 4px;
+  padding: 2px 6px;
+  font-family: Ibmplexmono Medium, sans-serif;
+  font-weight: 500;
+  line-height: 1.5;
+}
+
+p code.hljs, li code.hljs {
+	display: inline;
+  background: var(--deep-blue-black) !important;
+  color: var(--white-smoke) !important;
+  padding: 3px 6px;
+}
+
+/* Default White Color */
+p code.hljs, li code.hljs span {
+  color: var(--white-smoke) !important;
+}
+
+/* Default Blue Color
+p code.hljs-built_in, li code.hljs-built_in {
+  color: var(--deep-blue-black) !important;
+}
+*/
+
+/* Default Blue other Color 
+p code.hljs-variable.language, li code.hljs-variable.language {
+  color: var(--deep-blue-black) !important;
+}
+*/
+
+/* Default Purple Color
+p code.hljs-keyword, li code.hljs-keyword {
+  color: var(--deep-blue-black) !important;
+}
+*/
+
+/* Default Yellow Color
+p code.hljs-selector-class, li code.hljs-selector-class {
+  color: var(--deep-blue-black) !important;
+}
+*/
+
+/* Default Light Green Color 
+p code.hljs-string, li code.hljs-string {
+  color: var(--deep-blue-black) !important;
+}
+*/
+
+/* Default Dark Green Color 
+p code.hljs-property, li code.hljs-property {
+  color: var(--deep-blue-black) !important;
+}
+*/
+
+/* Default Red Color 
+p code.hljs-number, li code.hljs-number {
+  color: var(--deep-blue-black) !important;
+}
+*/
+
+/* Default Mustard Color
+p code.hljs-attr, li code.hljs-attr {
+  color: var(--deep-blue-black) !important;
+}
+*/
+
+</style>
+
+<style>
+ul {
+  padding: 0;
+  list-style-type: none;
+}
+
+ul li {
+  background-image: url('/portfolio/article-copies/_assets/649ec13180d73b35d8040f32_Rectangle-20142-ead26bce46.svg');
+  background-repeat: no-repeat;
+  padding-left: 2rem;
+  background-position: 0 8px;
+}
+</style>
+<style>
+  /* Hide <markdown> elements so that
+  they are not visible until after MD processing has occurred. */
+  markdown {
+    display: none;
+  }
+
+  /* Table formatting */ 
+  table {
+    border-collapse: collapse;
+    margin-bottom: 2rem;
+    width: 100%;
+    border: 2px solid #e7e7ec;
+    min-width: 300px;
+  }
+
+  table th {
+    line-height: 1.3;
+    padding: 1rem;
+    border: 1px solid #e0e0e0;
+    font-weight: 700;
+    text-align: left;
+  }
+
+  table td {
+    font-size: 16px;
+    font-style: normal;
+    font-stretch: normal;
+    line-height: 1.71;
+    letter-spacing: normal;
+    text-align: left;
+    color: #3c3c3b;
+    padding: 1rem;
+    border: 1px solid #e0e0e0;
+  }
+  
+  .text-rich-text h3 {
+  	margin-top: 3rem;
+  }
+  
+  @media screen and (max-width: 767px) {
+    .text-rich-text .w-embed {
+      overflow: auto;
+      width: calc(100vw - 1.3rem);
+      margin-left: -1.3rem;
+      position: relative;
+      padding-right: 1.5rem;
+      padding-left: 1.5rem;
+    }
+  }
+</style>
+
+<style>
+.fs-toc_sidebar.is-flex {
+	height: calc(100vh - 6rem) !important;
+}
+</style><script src="/portfolio/article-copies/_assets/64872dd3805a32626f4c2952-2F6544eda5f000985a163a8687-2F690a11-04277c7651.js" type="module" async="" siteId="64872dd3805a32626f4c2952" finsweet="components"></script><script type="text/javascript">window.__WEBFLOW_CURRENCY_SETTINGS = {"currencyCode":"USD","symbol":"$","decimal":".","fractionDigits":2,"group":",","template":"{{wf {\"path\":\"symbol\",\"type\":\"PlainText\"} }} {{wf {\"path\":\"amount\",\"type\":\"CommercePrice\"} }} {{wf {\"path\":\"currencyCode\",\"type\":\"PlainText\"} }}","hideDecimalForWholeNumbers":false};</script></head><body><div class="page-wrapper"><div class="global-styles w-embed"><style>
+
+/* Make text look crisper and more legible in all browsers */
+body {
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  font-smoothing: antialiased;
+  text-rendering: optimizeLegibility;
+}
+
+/* Focus state style for keyboard navigation for the focusable elements */
+*[tabindex]:focus-visible,
+  input[type="file"]:focus-visible {
+   outline: 0.125rem solid #4d65ff;
+   outline-offset: 0.125rem;
+}
+
+/* Get rid of top margin on first element in any rich text element */
+.w-richtext > :not(div):first-child, .w-richtext > div:first-child > :first-child {
+  margin-top: 0 !important;
+}
+
+/* Get rid of bottom margin on last element in any rich text element */
+.w-richtext>:last-child, .w-richtext ol li:last-child, .w-richtext ul li:last-child {
+	margin-bottom: 0 !important;
+}
+
+/* Prevent all click and hover interaction with an element */
+.pointer-events-off {
+	pointer-events: none;
+}
+
+/* Enables all click and hover interaction with an element */
+.pointer-events-on {
+  pointer-events: auto;
+}
+
+/* Create a class of .div-square which maintains a 1:1 dimension of a div */
+.div-square::after {
+	content: "";
+	display: block;
+	padding-bottom: 100%;
+}
+
+/* Make sure containers never lose their center alignment */
+.container-medium,.container-small, .container-large {
+	margin-right: auto !important;
+  margin-left: auto !important;
+}
+
+/* 
+Make the following elements inherit typography styles from the parent and not have hardcoded values. 
+Important: You will not be able to style for example "All Links" in Designer with this CSS applied.
+Uncomment this CSS to use it in the project. Leave this message for future hand-off.
+*/
+/*
+a,
+.w-input,
+.w-select,
+.w-tab-link,
+.w-nav-link,
+.w-dropdown-btn,
+.w-dropdown-toggle,
+.w-dropdown-link {
+  color: inherit;
+  text-decoration: inherit;
+  font-size: inherit;
+}
+*/
+
+/* Apply "..." after 3 lines of text */
+.text-style-3lines {
+	display: -webkit-box;
+	overflow: hidden;
+	-webkit-line-clamp: 3;
+	-webkit-box-orient: vertical;
+}
+
+/* Apply "..." after 2 lines of text */
+.text-style-2lines {
+	display: -webkit-box;
+	overflow: hidden;
+	-webkit-line-clamp: 2;
+	-webkit-box-orient: vertical;
+}
+
+/* Adds inline flex display */
+.display-inlineflex {
+  display: inline-flex;
+}
+
+/* These classes are never overwritten */
+.hide {
+  display: none !important;
+}
+
+@media screen and (max-width: 991px) {
+    .hide, .hide-tablet {
+        display: none !important;
+    }
+}
+  @media screen and (max-width: 767px) {
+    .hide-mobile-landscape{
+      display: none !important;
+    }
+}
+  @media screen and (max-width: 479px) {
+    .hide-mobile{
+      display: none !important;
+    }
+}
+ 
+.margin-0 {
+  margin: 0rem !important;
+}
+  
+.padding-0 {
+  padding: 0rem !important;
+}
+
+.spacing-clean {
+padding: 0rem !important;
+margin: 0rem !important;
+}
+
+.margin-top {
+  margin-right: 0rem !important;
+  margin-bottom: 0rem !important;
+  margin-left: 0rem !important;
+}
+
+.padding-top {
+  padding-right: 0rem !important;
+  padding-bottom: 0rem !important;
+  padding-left: 0rem !important;
+}
+  
+.margin-right {
+  margin-top: 0rem !important;
+  margin-bottom: 0rem !important;
+  margin-left: 0rem !important;
+}
+
+.padding-right {
+  padding-top: 0rem !important;
+  padding-bottom: 0rem !important;
+  padding-left: 0rem !important;
+}
+
+.margin-bottom {
+  margin-top: 0rem !important;
+  margin-right: 0rem !important;
+  margin-left: 0rem !important;
+}
+
+.padding-bottom {
+  padding-top: 0rem !important;
+  padding-right: 0rem !important;
+  padding-left: 0rem !important;
+}
+
+.margin-left {
+  margin-top: 0rem !important;
+  margin-right: 0rem !important;
+  margin-bottom: 0rem !important;
+}
+  
+.padding-left {
+  padding-top: 0rem !important;
+  padding-right: 0rem !important;
+  padding-bottom: 0rem !important;
+}
+  
+.margin-horizontal {
+  margin-top: 0rem !important;
+  margin-bottom: 0rem !important;
+}
+
+.padding-horizontal {
+  padding-top: 0rem !important;
+  padding-bottom: 0rem !important;
+}
+
+.margin-vertical {
+  margin-right: 0rem !important;
+  margin-left: 0rem !important;
+}
+  
+.padding-vertical {
+  padding-right: 0rem !important;
+  padding-left: 0rem !important;
+}
+
+a {color: inherit;}
+
+*[heading-highlights] div h2::before,
+*[heading-highlights] h2::before{
+		content: "";
+    position: absolute;
+    top: 0.75rem;
+    left: -3.6125rem;
+    width: 1.125rem;
+    height: 1.125rem;
+    background: #0064ff;
+}
+
+*[heading-highlights] div:nth-of-type(3n+2) h2::before,
+*[heading-highlights] h2:nth-of-type(3n+2)::before{
+    background: #bd2eff;
+    border-radius: 4px;
+}
+
+*[heading-highlights] div:nth-of-type(3n+3) h2::before,
+*[heading-highlights] h2:nth-of-type(3n+3)::before{
+    background: #ff7828;
+    border-radius: 50%;
+}
+
+@media (max-width: 767px) {
+    *[heading-highlights] div h2::before,
+    *[heading-highlights] h2::before {
+        left: -1.75rem;
+        top: 0.5rem;
+        width: 1rem;
+    		height: 1rem;
+    }
+}
+
+@media (max-width: 1349px) {
+  .header_subtitle-detail-component {
+    display: none;
+  }
+  .header_content {
+    padding-left: 0; /* Set the padding to 0 rem for screens less than 1100px */
+  }
+  .header_lottie-wrapper.is-bottom-left-column {
+  	display: none;
+	}
+  .header_lottie-wrapper.is-bottom-left-column-two {
+  	display: none;
+	}
+}
+
+/* Media query for screens less than 1100px */
+@media (max-width: 1099px) {
+  .product-feature_stroke {
+  height: 38rem;
+  }
+  .footer_top-wrapper {
+  grid-column-gap: 2rem;
+	}
+}
+/* CSS for screen sizes between 990px and 1100px */
+@media screen and (max-width: 1100px) and (min-width: 992px) {
+  	.heading-style-h1,
+		.heading-style-h2 {
+    font-size: 2.5rem;
+  }
+  
+  .heading-style-home-hero {
+    font-size: 2.5rem !important;
+  }
+}
+/* Media query for screens less than 1280px */
+@media (max-width: 1280px) {
+  .nav_link-item {
+    column-gap: 1.25rem; /* Set the column gap to 1.5 rem for screens less than 1100px */
+  }
+  .nav_star-wrapper {
+    margin-right: 0; /* Set the column gap to 1.5 rem for screens less than 1100px */
+  }
+  .nav_menu-buttons {
+  grid-column-gap: 0.75rem;
+	}
+}
+
+.circle-icon[colour="purple"] {
+  background-color: #BD2EFF;
+}
+.circle-icon[colour="coral"] {
+  background-color: #ff7828;
+}
+
+.square-icon[colour="purple"] {
+  background-color: #BD2EFF;
+}
+.square-icon[colour="coral"] {
+  background-color: #ff7828;
+}
+
+.benefit_card-image[image-fit="contain"] {
+  object-fit: contain;
+}
+.section_main-header[section-bg-colour="black"] {
+  background-color: #222229;
+}
+
+/* Styles for .header_grey when [section-bg-colour="black"] is present */
+.section_main-header[section-bg-colour="black"] + .header_grey-lottie {
+  visibility: visible;
+}
+
+/* Styles for .header_blue when [section-bg-colour="black"] is present */
+.section_main-header[section-bg-colour="black"] + .header_grey-lottie + .header_blu-lottiee {
+  visibility: hidden;
+}
+
+.hs-input[type="checkbox"] {
+    min-height: 1.7rem;
+    height: auto;
+  }
+
+.hs-form-field label {
+    font-family: Geist,sans-serif;
+    font-size: .875rem;
+    font-weight: 600;
+}
+
+.hs-form>fieldset {
+	max-width: 100% !important;
+}
+
+.hs-form .input {
+	margin-right: 0 !important;
+}
+
+.hs-input {
+	width: 100%;
+}
+
+.hs-input .hs-fieldtype-textarea {
+width: 100% !important;
+}
+
+.hs-field-desc{
+	margin-bottom: 1rem;
+  font-family: Geist,sans-serif;
+  font-size: .875rem;
+  font-weight: 400;
+}
+
+
+.hs-error-msg {
+	font-size: 0.75rem !important;
+  font-weight: 500 !important;
+}
+
+
+.hs-error-msgs inputs-list {
+	margin-bottom: 0rem;
+}
+
+
+.hs-form-field ul {
+	padding-left: 0rem;
+}
+
+.hs-form-booleancheckbox{
+  list-style: none;
+}
+
+.hs-form-booleancheckbox label{
+  display: flex;
+  column-gap: 0.5rem;
+  font-family: Geist,sans-serif;
+  font-size: .875rem;
+  font-weight: 400;
+  text-transform: none;
+}
+
+.hs-input[type="checkbox"] {
+    min-height: 1.7rem;
+    height: auto;
+    max-width: 1rem;
+}
+
+.legal-consent-container .hs-form-booleancheckbox-display>span {
+    display: block;
+    margin-left: 0.5rem;
+}
+
+.legal-consent-container .hs-richtext {
+    font-size: 0.75rem;
+}
+
+.w-lightbox-close {
+    height: 2.5em;
+    width: 2.75rem;
+    right: 1.5rem;
+    border-radius: 50%;
+    background-color: #ff7828;
+    opacity: 1 !important;
+}
+
+/* Slider nav dots */
+.w-slider-dot {
+    width: 0.75rem;
+    height: 0.75rem;
+}
+
+
+.nav_link-item-wrapper:open .nav_link-stroke {
+transform: translate(0%, 0px);
+}
+
+[cell-icon='orange'] {
+	color: var(--coral);
+}
+[cell-icon='purple'] {
+	color: var(--medium-orchid);
+}
+@media only screen and (min-width: 300px ) and (max-width: 385px) {
+  .feature-table_header-icon {
+  display: none;
+  }
+}
+
+@media only screen and (min-width: 300px ) and (max-width: 340px) {
+  .feature-table_header-button {
+  font-size: 0.675rem;
+  }
+  .feature-table_header-heading {
+  font-size: 1rem;
+  }
+  .feature-table_label {
+  font-size: 0.75rem;
+  }
+}
+</style></div><div class="nav_banner-wrapper"><div class="nav_banner-content-wrapper"><div class="nav_banner-text">Watch the webinar: Ingesting varied and distributed configuration metadata</div><a href="https://quix.io/events/masterclass-on-ingesting-varied-and-distributed-configuration-metadata" class="button-primary is-nav-banner w-inline-block"><div>More details</div><div class="icon-embed-xxsmall w-embed"><svg width="16" height="16" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg">
+<path d="M8.0013 2.6665L7.06797 3.59984L10.8013 7.33317H2.66797V8.6665H10.8013L7.06797 12.3998L8.0013 13.3332L13.3346 7.99984L8.0013 2.6665Z" fill="currentColor"/>
+</svg></div></a></div></div><div data-animation="default" class="nav_component_new w-nav" data-easing2="ease" fs-scrolldisable-element="smart-nav" data-easing="ease" data-collapse="medium" role="banner" data-duration="400" data-doc-height="1"><div class="nav_main-wrapper width-76rem"><div class="nav_column-wrapper"><a href="https://quix.io/" Title="Quix’s Homepage" aria-label="Link to Homepage" class="nav_logo-link w-nav-brand"><img width="139" height="50" alt="Quix company logo in monochrome dark" src="/portfolio/article-copies/_assets/68dd5a81f8593743cf0c25cc_Quix-20logo-202025-20--20Dark-20-mo-57d0d12569.svg" loading="eager" class="nav_logo-img test"/><div class="hide">Quix Homepage</div></a><link rel="prefetch" href="/"/><nav role="navigation" class="nav_menu-container w-nav-menu"><div class="nav_link-list"><div class="nav_links-wrapper"><div data-delay="100" data-hover="true" class="nav_menu-dropdown w-dropdown"><div class="nav_dropdown-toggle w-dropdown-toggle"><div class="nav_dropdown-icon w-icon-dropdown-toggle"></div><div class="nav_menu-dropdown-link">Product</div></div><nav class="nav_dropdown-list-light w-dropdown-list"><div class="nav_dropdown-no-icon"><a href="https://quix.io/quix-cloud" class="nav_dropdown-link-02 w-dropdown-link">Quix Cloud</a></div><div class="nav_dropdown-no-icon"><a href="https://quix.io/quix-streams" class="nav_dropdown-link-02 w-dropdown-link">Quix Streams</a></div><div class="nav_dropdown-no-icon"><a href="https://quix.io/templates" class="nav_dropdown-link-02 w-dropdown-link">Project templates</a></div><div class="nav_dropdown-no-icon"><a href="https://quix.io/application-templates" class="nav_dropdown-link-02 w-dropdown-link">App templates</a></div></nav></div><div data-delay="100" data-hover="true" class="nav_menu-dropdown w-dropdown"><div class="nav_dropdown-toggle is-last-item w-dropdown-toggle"><div class="nav_dropdown-icon w-icon-dropdown-toggle"></div><div class="nav_menu-dropdown-link">Solutions</div></div><nav class="nav_dropdown-list-light w-dropdown-list"><div class="nav_dropdown-no-icon"><a href="https://quix.io/use-cases/lab-testing" class="nav_dropdown-link-02 w-dropdown-link">Lab testing</a></div><div class="nav_dropdown-no-icon"><a href="https://quix.io/use-cases/field-testing" class="nav_dropdown-link-02 w-dropdown-link">Field testing</a></div><div class="nav_dropdown-no-icon"><a href="https://quix.io/use-cases/model-in-the-loop-testing" class="nav_dropdown-link-02 w-dropdown-link">Model-in-the-loop testing</a></div><div class="nav_dropdown-no-icon"><a href="https://quix.io/use-cases/software-in-the-loop-testing" class="nav_dropdown-link-02 w-dropdown-link">Software-in-the-loop testing</a></div><div class="nav_dropdown-no-icon"><a href="https://quix.io/use-cases/hardware-in-the-loop-testing" class="nav_dropdown-link-02 w-dropdown-link">Hardware-in-the-loop testing</a></div><div class="nav_dropdown-no-icon"><a href="https://quix.io/use-cases/human-in-the-loop-testing" class="nav_dropdown-link-02 w-dropdown-link">Human-in-the-loop testing</a></div><div class="nav_dropdown-no-icon"><a href="https://quix.io/use-cases/manufacturing" class="nav_dropdown-link-02 w-dropdown-link">Industry: Manufacturing</a></div><div class="nav_dropdown-no-icon"><a href="https://quix.io/use-cases/energy" class="nav_dropdown-link-02 w-dropdown-link">Industry: Energy</a></div><div class="nav_dropdown-no-icon"><a href="https://quix.io/customer-stories" class="nav_dropdown-link-02 w-dropdown-link">Customer stories</a></div></nav></div><a href="https://quix.io/integrations" class="nav_link-item-wrapper w-inline-block"><div class="nav_text-link-small is-ghost">Integrations</div><div class="nav_text-link-small">Integrations</div><div class="nav_link-line"></div></a><a href="https://quix.io/pricing" class="nav_link-item-wrapper extra-margin w-inline-block"><div class="nav_text-link-small is-ghost">Pricing</div><div class="nav_text-link-small">Pricing</div><div class="nav_link-line"></div></a><a href="https://quix.io/blog" class="nav_link-item-wrapper extra-margin w-inline-block"><div class="nav_text-link-small is-ghost">Blog</div><div class="nav_text-link-small">Blog</div><div class="nav_link-line"></div></a><a href="https://quix.io/docs" target="_blank" class="nav_link-item-wrapper extra-margin w-inline-block"><div class="nav_text-link-small is-ghost">Docs</div><div class="nav_text-link-small">Docs</div><div class="nav_link-line"></div></a></div><div class="nav_bottom-wrapper"><div rel="noopener" data-w-id="f345a883-b815-bc77-23c6-236c4c6eba9f" class="nav_icons-wrapper"><a rel="noopener" href="https://github.com/quixio/quix-streams" target="_blank" class="nav_icon-link w-inline-block"><div class="icon-embed-xsmall w-embed"><svg width=" 100%" height=" 100%" viewBox="0 0 25 24" role='img' fill="none" xmlns="http://www.w3.org/2000/svg"><title>Github icon</title><g clip-path="url(#clip0_4958_684)"><path fill-rule="evenodd" clip-rule="evenodd" d="M12.5099 0C5.86875 0 0.5 5.40833 0.5 12.0992C0.5 17.4475 3.93994 21.9748 8.71205 23.5771C9.30869 23.6976 9.52724 23.3168 9.52724 22.9965C9.52724 22.716 9.50757 21.7545 9.50757 20.7527C6.1667 21.474 5.47099 19.3104 5.47099 19.3104C4.93409 17.9082 4.13858 17.5478 4.13858 17.5478C3.04511 16.8066 4.21823 16.8066 4.21823 16.8066C5.43117 16.8868 6.06763 18.0486 6.06763 18.0486C7.14118 19.8913 8.87111 19.3707 9.56706 19.0501C9.66638 18.2688 9.98473 17.728 10.3228 17.4276C7.65817 17.1471 4.85469 16.1055 4.85469 11.458C4.85469 10.1359 5.3316 9.05428 6.08729 8.21304C5.96807 7.91263 5.5504 6.67043 6.20677 5.00787C6.20677 5.00787 7.22083 4.6873 9.50732 6.24981C10.4863 5.98497 11.4958 5.85024 12.5099 5.84911C13.524 5.84911 14.5577 5.98948 15.5123 6.24981C17.799 4.6873 18.8131 5.00787 18.8131 5.00787C19.4695 6.67043 19.0515 7.91263 18.9323 8.21304C19.7079 9.05428 20.1652 10.1359 20.1652 11.458C20.1652 16.1055 17.3617 17.1269 14.6772 17.4276C15.1148 17.8081 15.4924 18.5292 15.4924 19.6711C15.4924 21.2936 15.4727 22.5957 15.4727 22.9962C15.4727 23.3168 15.6915 23.6976 16.2879 23.5774C21.06 21.9745 24.4999 17.4475 24.4999 12.0992C24.5196 5.40833 19.1312 0 12.5099 0Z" fill="currentColor"/>
+</g><defs><clipPath id="clip0_4958_684"><rect width="24" height="24" fill="currentColor" transform="translate(0.5)"/>
+</clipPath>
+</defs>
+</svg></div><div>View our Github repo</div></a><a rel="noopener" href="https://quix.io/slack-invite" target="_blank" class="nav_icon-link w-inline-block"><div class="icon-embed-xsmall w-embed"><svg width=" 100%" height=" 100%" role='img' viewBox="0 0 25 24" fill="none" xmlns="http://www.w3.org/2000/svg"><title>Slack Icon</title>
+<path d="M9.3337 5.04235C7.94608 5.04235 6.81253 3.90879 6.81253 2.52117C6.81253 1.13355 7.94608 0 9.3337 0C10.7213 0 11.8549 1.13355 11.8549 2.52117V5.04235H9.3337Z" fill="currentColor"/>
+<path d="M3.0212 17.6873C4.40883 17.6873 5.54238 16.5538 5.54238 15.1661V12.645H3.0212C1.63358 12.645 0.500031 13.7785 0.500031 15.1661C0.500031 16.5538 1.63358 17.6873 3.0212 17.6873Z" fill="currentColor"/>
+<path d="M9.3337 12.645C7.94608 12.645 6.81253 13.7785 6.81253 15.1661V21.4788C6.81253 22.8665 7.94608 24 9.3337 24C10.7213 24 11.8549 22.8665 11.8549 21.4788V15.1661C11.8549 13.7785 10.7213 12.645 9.3337 12.645Z" fill="currentColor"/>
+<path d="M11.8551 8.83386C11.8551 7.44623 10.7215 6.31268 9.33391 6.31268H3.0212C1.63358 6.31268 0.500031 7.44623 0.500031 8.83386C0.500031 10.2215 1.63358 11.355 3.0212 11.355H9.33391C10.7215 11.355 11.8551 10.2215 11.8551 8.83386Z" fill="currentColor"/>
+<path d="M19.4576 8.83386C19.4576 7.44623 20.5911 6.31268 21.9787 6.31268C23.3663 6.31268 24.4999 7.44623 24.4999 8.83386C24.4999 10.2215 23.3663 11.355 21.9787 11.355H19.4576V8.83386Z" fill="currentColor"/>
+<path d="M15.6662 11.355C17.0538 11.355 18.1874 10.2215 18.1874 8.83388V2.52117C18.1874 1.13355 17.0538 0 15.6662 0C14.2786 0 13.1451 1.13355 13.1451 2.52117V8.83388C13.1451 10.2215 14.2786 11.355 15.6662 11.355Z" fill="currentColor"/>
+<path d="M15.6662 18.9576C17.0538 18.9576 18.1874 20.0912 18.1874 21.4788C18.1874 22.8664 17.0538 24 15.6662 24C14.2786 24 13.1451 22.8664 13.1451 21.4788V18.9576H15.6662Z" fill="currentColor"/>
+<path d="M13.1451 15.1661C13.1451 16.5538 14.2786 17.6873 15.6662 17.6873H21.9789C23.3665 17.6873 24.5001 16.5538 24.5001 15.1661C24.5001 13.7785 23.3665 12.645 21.9789 12.645H15.6662C14.2786 12.645 13.1451 13.7785 13.1451 15.1661Z" fill="currentColor"/>
+</svg></div><div>Join our Slack community</div></a></div><div class="nav_mobile-button-wrapper"><a rel="noopener" href="https://quix.io/book-a-demo" class="button-primary is-xsmall w-button">Book a call</a></div></div></div></nav></div><div class="nav_menu-wrapper"><div class="nav_buttons-wrapper"><a href="https://quix.io/book-a-demo" class="button-primary is-xsmall w-button">Book a demo</a></div></div><div class="nav_menu-button w-nav-button"><div class="menu-icon-2"><div class="menu-icon_line-top-2"></div><div class="menu-icon_line-middle-2"><div class="menu-icon_line-middle-inner"></div></div><div class="menu-icon_line-bottom-2"></div></div></div></div></div><main class="main-wrapper"><section class="section_content"><div id="next-section" class="scroll-anchor"></div><div class="padding-global"><div class="container-medium"><div class="fs-toc_component"><div class="fs-toc_sidebar-v2 hide-tablet"><div class="fs-toc_sidebar-back-button"><a rel="noopener" href="https://quix.io/blog" class="button_text-only is-icon is-grey w-inline-block"><div class="icon-embed-xxsmall w-embed"><svg width="16" height="16" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg">
+<path d="M8.00016 13.3333L8.9335 12.4L5.20016 8.66666L13.3335 8.66666L13.3335 7.33333L5.20016 7.33333L8.9335 3.59999L8.00016 2.66666L2.66683 7.99999L8.00016 13.3333Z" fill="currentColor"/>
+</svg></div><div class="text-size-small">Blog index</div></a></div><div class="fs-toc_link-content"><div class="fs-toc_link-wrapper is-h2"><a href="#" class="fs-toc_link w-inline-block"><div fs-toc-element="link">Example H2</div></a><div fs-toc-element="ix-trigger" id="w-node-_9ca4d9c0-e75b-880b-c337-a2cc62dbc4dd-ca8b06d7" class="fs-toc_h-trigger"></div><div class="fs-toc_link-wrapper is-h3"><a href="#" class="fs-toc_link is-h3 w-inline-block"><div fs-toc-element="link">Example H3</div></a><div class="fs-toc_link-wrapper is-h4"><a href="#" class="fs-toc_link is-h4 w-inline-block"><div fs-toc-element="link">Example H4</div></a><div class="fs-toc_link-wrapper is-h5"><a href="#" class="fs-toc_link is-h5 w-inline-block"><div fs-toc-element="link">Example H5</div></a><div class="fs-toc_link-wrapper is-h6"><a href="#" class="fs-toc_link is-h6 w-inline-block"><div fs-toc-element="link">Example H6</div></a></div></div></div></div></div></div><div class="blog_related-pages w-condition-invisible"><div class="text-size-small text-weight-semibold">Related content:</div><div class="related-pages_links-wrapper"><a href="#" class="related-pages_link w-inline-block w-condition-invisible"><div class="icon-embed-xxsmall w-embed"><svg width="16" height="16" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg">
+<path fill-rule="evenodd" clip-rule="evenodd" d="M3.33333 3.33333V12.6667H12.6667V8H14V12.6667C14 13.4 13.4 14 12.6667 14H3.33333C2.59333 14 2 13.4 2 12.6667V3.33333C2 2.6 2.59333 2 3.33333 2H8V3.33333H3.33333ZM9.33333 3.33333V2H14V6.66667H12.6667V4.27333L6.11333 10.8267L5.17333 9.88667L11.7267 3.33333H9.33333Z" fill="#0064FF"/>
+</svg></div><div class="related-pages_link-text w-dyn-bind-empty"></div></a><a href="#" class="related-pages_link w-inline-block w-condition-invisible"><div class="icon-embed-xxsmall w-embed"><svg width="16" height="16" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg">
+<path fill-rule="evenodd" clip-rule="evenodd" d="M3.33333 3.33333V12.6667H12.6667V8H14V12.6667C14 13.4 13.4 14 12.6667 14H3.33333C2.59333 14 2 13.4 2 12.6667V3.33333C2 2.6 2.59333 2 3.33333 2H8V3.33333H3.33333ZM9.33333 3.33333V2H14V6.66667H12.6667V4.27333L6.11333 10.8267L5.17333 9.88667L11.7267 3.33333H9.33333Z" fill="#0064FF"/>
+</svg></div><div class="related-pages_link-text w-dyn-bind-empty"></div></a><a href="#" class="related-pages_link w-inline-block w-condition-invisible"><div class="icon-embed-xxsmall w-embed"><svg width="16" height="16" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg">
+<path fill-rule="evenodd" clip-rule="evenodd" d="M3.33333 3.33333V12.6667H12.6667V8H14V12.6667C14 13.4 13.4 14 12.6667 14H3.33333C2.59333 14 2 13.4 2 12.6667V3.33333C2 2.6 2.59333 2 3.33333 2H8V3.33333H3.33333ZM9.33333 3.33333V2H14V6.66667H12.6667V4.27333L6.11333 10.8267L5.17333 9.88667L11.7267 3.33333H9.33333Z" fill="#0064FF"/>
+</svg></div><div class="related-pages_link-text w-dyn-bind-empty"></div></a></div></div></div><div class="content_column"><div class="w-layout-vflex blog-header_component"><div id="w-node-_1f08ea12-d65b-e893-2159-8f2cdd3ec15b-ca8b06d7" class="blog-header_content"><div class="card_info-group flex-align-left"><div class="card_tag background-color-blue"><div>Industry insights</div></div><div class="text-size-small text-color-grey">May 24, 2023</div></div><div class="blog-header_title-wrapper"><h1 class="heading-style-h2">Bridging the gap between data scientists and engineers in machine learning workflows</h1><p class="text-size-medium text-color-grey">Moving code from prototype to production can be tricky—especially for data scientists. There are many challenges in deploying code that needs to calculate features for ML models in real-time. I look at potential solutions to ease the friction.</p></div><div class="blog_author-wrapper is-article-header"><div class="blog_author-image-wrapper"><img loading="eager" width="64" height="64" src="/portfolio/article-copies/_assets/64b12fcc061c5fcdf05c67fd_Mike-Rosam-429d3941a0.webp" alt="Mike Rosam" class="blog_author-image"/></div><div class="blog_author-text"><div class="text-weight-semibold">Mike Rosam</div><div class="text-color-grey">CEO &amp; Co-Founder</div></div></div></div><div class="blog_image-wrapper"><img height="444" loading="lazy" width="668" src="/portfolio/article-copies/_assets/64a8024b769f033c11b565a5_Illustration-of-20two-people-in-the-63c8080fb7.webp" alt="Illustration of two people in the desert." class="blog_image"/></div></div><div class="fs-toc_sidebar-v2 hide-desktop"><div class="fs-toc_sidebar-back-button"><a rel="noopener" href="https://quix.io/blog" class="button_text-only is-icon is-grey w-inline-block"><div class="icon-embed-xxsmall w-embed"><svg width="16" height="16" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg">
+<path d="M8.00016 13.3333L8.9335 12.4L5.20016 8.66666L13.3335 8.66666L13.3335 7.33333L5.20016 7.33333L8.9335 3.59999L8.00016 2.66666L2.66683 7.99999L8.00016 13.3333Z" fill="currentColor"/>
+</svg></div><div class="text-size-small">Back</div></a></div><div class="fs-toc_link-content"><div class="fs-toc_link-wrapper is-h2"><a href="#" class="fs-toc_link w-inline-block"><div fs-toc-element="link">Example H2</div></a><div fs-toc-element="ix-trigger" id="w-node-dd7f10b7-47c3-f1e2-5b9f-bdc87991e3e0-ca8b06d7" class="fs-toc_h-trigger"></div><div class="fs-toc_link-wrapper is-h3"><a href="#" class="fs-toc_link is-h3 w-inline-block"><div fs-toc-element="link">Example H3</div></a><div class="fs-toc_link-wrapper is-h4"><a href="#" class="fs-toc_link is-h4 w-inline-block"><div fs-toc-element="link">Example H4</div></a><div class="fs-toc_link-wrapper is-h5"><a href="#" class="fs-toc_link is-h5 w-inline-block"><div fs-toc-element="link">Example H5</div></a><div class="fs-toc_link-wrapper is-h6"><a href="#" class="fs-toc_link is-h6 w-inline-block"><div fs-toc-element="link">Example H6</div></a></div></div></div></div></div></div><div class="blog_related-pages w-condition-invisible"><div class="text-size-small text-weight-semibold">Related content:</div><div class="related-pages_links-wrapper"><a href="#" class="related-pages_link w-inline-block w-condition-invisible"><div class="icon-embed-xxsmall w-embed"><svg width="16" height="16" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg">
+<path fill-rule="evenodd" clip-rule="evenodd" d="M3.33333 3.33333V12.6667H12.6667V8H14V12.6667C14 13.4 13.4 14 12.6667 14H3.33333C2.59333 14 2 13.4 2 12.6667V3.33333C2 2.6 2.59333 2 3.33333 2H8V3.33333H3.33333ZM9.33333 3.33333V2H14V6.66667H12.6667V4.27333L6.11333 10.8267L5.17333 9.88667L11.7267 3.33333H9.33333Z" fill="#0064FF"/>
+</svg></div><div class="related-pages_link-text w-dyn-bind-empty"></div></a><a href="#" class="related-pages_link w-inline-block w-condition-invisible"><div class="icon-embed-xxsmall w-embed"><svg width="16" height="16" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg">
+<path fill-rule="evenodd" clip-rule="evenodd" d="M3.33333 3.33333V12.6667H12.6667V8H14V12.6667C14 13.4 13.4 14 12.6667 14H3.33333C2.59333 14 2 13.4 2 12.6667V3.33333C2 2.6 2.59333 2 3.33333 2H8V3.33333H3.33333ZM9.33333 3.33333V2H14V6.66667H12.6667V4.27333L6.11333 10.8267L5.17333 9.88667L11.7267 3.33333H9.33333Z" fill="#0064FF"/>
+</svg></div><div class="related-pages_link-text w-dyn-bind-empty"></div></a><a href="#" class="related-pages_link w-inline-block w-condition-invisible"><div class="icon-embed-xxsmall w-embed"><svg width="16" height="16" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg">
+<path fill-rule="evenodd" clip-rule="evenodd" d="M3.33333 3.33333V12.6667H12.6667V8H14V12.6667C14 13.4 13.4 14 12.6667 14H3.33333C2.59333 14 2 13.4 2 12.6667V3.33333C2 2.6 2.59333 2 3.33333 2H8V3.33333H3.33333ZM9.33333 3.33333V2H14V6.66667H12.6667V4.27333L6.11333 10.8267L5.17333 9.88667L11.7267 3.33333H9.33333Z" fill="#0064FF"/>
+</svg></div><div class="related-pages_link-text w-dyn-bind-empty"></div></a></div></div></div><div class="blog_intro-banner-container hide"><div class="blog_intro-banner"><div class="section_cta"><div class="cta_card is-blog-banner"><div class="cta-card_content-left"><div class="max-width-xlarge"><h4>Python stream processing, simplified</h4><div class="spacer-small"></div><p class="text-size-small text-color-grey">Pure Python. No JVM. No wrappers. No cross-language debugging. Use streaming DataFrames and the whole Python ecosystem to build stream processing applications.</p></div></div><div class="button-group is-full-width-mobile is-vertical-2"><a href="https://portal.demo.quix.io/?workspace=demo-dataintegrationdemo-prod&amp;token=pat-65bd4b619ca64597ad74354b35eb8622" target="_blank" rel="noopener" class="button-primary is-xsmall is-flex-grow-mobile w-button">Explore the platform</a><a href="https://github.com/quixio/quix-streams" rel="noopener" target="_blank" class="button-primary is-secondary is-xsmall is-flex-grow-mobile w-button">Quix Streams repo</a></div></div></div></div><div class="blog_intro-banner w-condition-invisible"><div class="section_cta"><div class="cta_card is-blog-banner"><div class="cta-card_content-left"><div class="max-width-xlarge"><h4>Python stream processing, simplified</h4><div class="spacer-small"></div><p class="text-size-small text-color-grey">Pure Python. No JVM. No wrappers. No cross-language debugging. Use streaming DataFrames and the whole Python ecosystem to build stream processing applications.</p></div></div><div class="button-group is-full-width-mobile is-vertical-2"><a href="https://portal.demo.quix.io/?workspace=demo-dataintegrationdemo-prod&amp;token=pat-65bd4b619ca64597ad74354b35eb8622" target="_blank" rel="noopener" class="button-primary is-xsmall is-flex-grow-mobile w-button">Explore the platform</a><a href="https://github.com/quixio/quix-streams" rel="noopener" target="_blank" class="button-primary is-secondary is-xsmall is-flex-grow-mobile w-button">Quix Streams repo</a></div></div></div></div><div class="blog_intro-banner hide-tablet w-condition-invisible"><div class="section_cta"><div class="cta_card is-blog-banner"><div class="cta-card_content-left"><div class="max-width-xlarge"><h4>Data integration, simplified</h4><div class="spacer-small"></div><p class="text-size-small text-color-grey">Ingest, pre-process and load high volumes of data into any database, lake or warehouse, without overloading your systems or budgets.</p></div></div><div class="button-group is-full-width-mobile is-vertical-2"><a href="https://portal.demo.quix.io/?workspace=demo-dataintegrationdemo-prod&amp;token=pat-65bd4b619ca64597ad74354b35eb8622" target="_blank" rel="noopener" class="button-primary is-xsmall is-flex-grow-mobile w-button">Explore the platform</a><a href="https://quix.io/book-a-demo" rel="noopener" class="button-primary is-secondary is-xsmall is-flex-grow-mobile w-button">Book a demo</a></div></div></div></div><div class="content_cta background-color-dark-blue w-condition-invisible"><div class="content_cta-text-and-button"><div class="content_cta-text-wrapper"><h4 class="text-color-white heading-style-h3">The 4 Pillars of a Successful AI Strategy</h4><div class="text-color-white-70 text-size-regular">Foundational strategies that leading companies use to overcome common obstacles and achieve sustained AI success.</div></div><a rel="noopener" href="https://quix.io/4-pillars-of-successful-ai-strategy-guide" class="button-primary is-small is-full-width-mobile w-button">Get the guide</a></div><img src="/portfolio/article-copies/_assets/673f39296a681ce570f11cea_4-20pillars-20guide-20cover-20mock-380645e63f.webp" loading="lazy" alt="" class="content_cta-image"/></div><div class="content_cta background-color-dark-blue w-condition-invisible"><div class="content_cta-text-and-button"><div class="content_cta-text-wrapper"><h4 class="text-color-white heading-style-h3">Guide to the Event-Driven, Event Streaming Stack</h4><div class="text-color-white-70">Practical insights into event-driven technologies for developers and software architects.</div></div><a rel="noopener" href="https://quix.io/event-driven-event-streaming-guide" class="button-primary is-small is-full-width-mobile w-button">Get the guide</a></div><img src="/portfolio/article-copies/_assets/655c97f405a7cbcd775ff738_Event-20streaming-20stack-20cover-2-88ab5a450b.avif" loading="lazy" alt="" class="content_cta-image"/></div></div><div class="blog_boilerplate-intro hide"><div>Quix is a performant, general-purpose processing framework for streaming data. Build real-time AI applications and analytics systems in fewer lines of code using DataFrames with stateful operators and run it anywhere Python is installed.</div><div class="boilerplate-intro_link-block"><a href="https://share.hsforms.com/1iW0TmZzKQMChk0lxd_tGiw4yjw2" target="_blank" class="link-style-blue text-weight-semibold">Book a demo with one of our experts</a></div></div><div class="fs-toc_rich-text"><div fs-richtext-element="rich-text" fs-toc-element="contents" fs-toc-offsettop="6rem" fs-codehighlight-theme="webflow" fs-codehighlight-element="code" class="text-rich-text c-rich-content w-richtext"><h2>Introduction</h2><p>In a companion article, <a target="_blank" href="https://quix.io/blog/drawbacks-ksqldb-ml-workflows">The drawbacks of ksqlDB in machine learning workflows</a>, I talked about the impedance gap in machine learning workflows—the term “impedance” here, refers to the technical barriers in getting an ML model from prototype to production. And ksqlDB was expected to help bridge this gap. Yet, these expectations were not met because ksqlDB suffers from several limitations that hinder its effectiveness for data scientists and ML engineers. I pointed out that ksqlDB’s underlying technology, Kafka Streams, also has performance limitations when operating at scale which is why Apache Kafka is often <a target="_blank" href="https://quix.io/blog">paired with Apache Flink</a> instead. Indeed Confluent themselves recently<a target="_blank" href="https://twitter.com/jaykreps/status/1658475697403482113"> announced their own managed Flink offering</a>, which is likely intended as a more powerful complement to their managed Kafka solution. </p><p>Unfortunately, Kafka and Flink don’t solve the impedance gap either, since this dynamic duo is also firmly anchored in the Java ecosystem. Python is the lingua franca in the data science world so it makes sense to offer them a pure Python solution (which ksqlDB isn’t). Of course, we need more than this to ease the friction that causes this gap. So what else to we need? The short answer is more tooling to help data scientists contribute to parts of the machine learning workflow.</p><p>To properly understand what I’m talking about, let’s take a closer look at the details of this workflow.</p><p>A good reference is the following diagram from <a target="_blank" href="https://ml-ops.org/">ml-ops.org</a> (by INNOQ), which gives an <a target="_blank" href="https://ml-ops.org/content/end-to-end-ml-workflow">overview of the end-to-end machine learning workflow</a>:</p><figure style="max-width:2728pxpx" class="w-richtext-align-fullwidth w-richtext-figure-type-image"><div><img loading="lazy" alt="A diagram showing the process of machine learning engineering." src="/portfolio/article-copies/_assets/64c7a101bcbe3731b9eaa12c_ml-engineering-8570904929.webp"/></div></figure><p>Note that this a very batch-oriented view of the ML workflow which is still fairly typical. As Fennel.ai explain in their excellent piece “<a target="_blank" href="https://fennel.ai/blog/challenges-of-building-realtime-ml-pipelines/">Challenges of Building Realtime Machine Learning Pipelines</a>” most companies start with an all-batch ML pipeline before incorporating more real-time processes into their workflow.</p><h2>The data pipeline</h2><figure style="max-width:2627pxpx" class="w-richtext-align-fullwidth w-richtext-figure-type-image"><div><img loading="lazy" alt="A diagram showing the process of data pipeline." src="/portfolio/article-copies/_assets/64c7a645152b5caa50fd16eb_data_pipeline-c940c1f38e.webp"/></div></figure><p>This pipeline includes all the steps leading up to the creation of the machine learning model, such as data collection, ingestion, preprocessing, and exploration. Data engineers usually help data scientists ingest the data, but in smaller companies, data scientists are often left to figure this out on their own. After the data has been ingested, data scientists work on preprocessing it and conducting Exploratory Data Analysis (EDA). Then, they work on <a href="https://quix.io/blog/what-is-real-time-featuring-engineering">feature engineering</a> tasks such as  identifying features that could improve the model.</p><h3>The friction of code translation</h3><p>For businesses where real-time data is crucial (think food delivery, ride sharing, stock trading, and so on). Apache Kafka is often used to ingest real-time data into a database so that it can be queried and passed to an ML model for training. This means that data from Kafka needs to be ingested into a format that’s easier for data scientists to work with. Raw Kafka messages are typically serialized in formats like Avro, JSON, or Protobuf, but data scientists are used to working with tabular formats such as CSVs and pandas DataFrames. That’s why some kind of stream processing tool such as Flink or Spark is used to ingest the data for further processing.</p><p>Tools such as ksqlDB attempted to reduce the reliance on connector code and allow data scientists to query a Kafka topic directly and create intermediate transformations with a simple SQL syntax. However, ksqlDB simply didn’t have the flexibility of a framework like pandas (which couldn’t be run on a ksqlDB cluster). Instead, custom transformations had to be implemented in Java as UDFs or standalone Kafka Streams applications. </p><p>A similar problem exists for Flink and Spark. Though they have Python APIs, they still use the JVM for their underlying transformations. You cannot use pandas transformations on a Flink cluster without implementing some kind of UDF. Flink has its own transformations but translation work is required to convert a pandas transformation to the Flink or Spark syntax. This translation process can slow down the overall data analysis and model development process, leading to fewer insights and production deployments.</p><h3>Possible Solutions</h3><p>A natural question to ask would be “why do data scientists need to translate their pandas transformations into another syntax?” or “why can’t you run pandas transformations in production?”. For real-time streaming use cases this isn&#x27;t practical because pandas isn&#x27;t designed for high-throughput, distributed data processing. You would quickly run into performance bottlenecks. That’s why most companies use scalable, fault-tolerant stream processing frameworks like Flink or Kafka Streams</p><p>To remove the friction of code translation, there needs to be a stream processing framework with a similar capabilities to Flink or Spark, but one that will let you use pandas or other data science libraries in a scalable way. </p><p>The scalability problem has already been solved for batch processing. For example, <a target="_blank" href="https://github.com/modin-project/modin">Modin</a> is an open-source library that aims to speed up and scale pandas operations on large datasets by using distributed computing with Dask or Ray as the backend. This in turn, eliminates the need to translate prototype code into Spark syntax when processing large datasets. </p><p>All data scientists need then, is a similar solution for applying feature transformations to high-volume data streams in a scalable way. There are open source libraries like Streamz and Faust which have gone some way to solving this problem, but the long-term support and stability of these projects is unclear since they’re now maintained by volunteers. They also don’t reliably solve all of the complex problems that come with parallel processing and horizontal scaling. This is why, for the time being, Kafka is still usually married to Flink.</p><h2>The machine learning pipeline</h2><figure style="max-width:2526pxpx" class="w-richtext-align-fullwidth w-richtext-figure-type-image"><div><img loading="lazy" alt="A diagram showing the process of machine learning pipeline." src="/portfolio/article-copies/_assets/64c7a765b0038902cdb697e4_the-machine-learning-pipeline-bc6f89d71d.webp"/></div></figure><p>Here, data scientists focus on feature engineering, feature selection, model training, evaluation, and tuning. The primary goal of model development is to create a robust and accurate model that can be deployed in a production environment.</p><p>It starts with model training, where machine learning algorithms are applied to the training data, ‌often in a Notebook UI environment (such as Jupyter, Google Colab, or Amazon Sagemaker) using Python frameworks like TensorFlow, ScikitLearn, PyTorch and so on. Following this, the model is assessed and tested to verify its alignment with the initial original business goals. Finally, the model usually needs to be converted into a format suitable for serving (such as Pickle,  ONYX or PMML) and integrated into a service.</p><h3>The friction of performance vs accuracy</h3><p>Here, data scientists focus on selecting the appropriate algorithms and feature engineering to build accurate and useful models, while engineers prioritize the scalability, performance, and maintainability of the models in production environments. These priorities often come into conflict when one side has to make a tradeoff. </p><p>For example, data scientists might choose an algorithm like Support Vector Machines (SVM) because it provides high accuracy and handles high-dimensional data. Yet, engineers might prefer a different algorithm or approach (such as a simpler linear model or a decision tree) which may be more efficient and easier to scale, but might not offer the same level of accuracy as the SVM chosen by data scientists. Usually, the performance consideration wins because an application needs to meet the requirements of end users who expect real-time or near real-time feedback.</p><p>On top of that, there are many  transformations that are straightforward to perform on static data but much harder in a real-time context. This makes it challenging to adapt the transformation for a production environment. For example, in a batch context, it’s straightforward to calculate the average purchase price for a customer over the past four weeks. It’s more challenging if you want to calculate the average purchase price while incorporating the data from the current session in real time. You need to access the historical data from an online feature store and combine it with the data from the session in real time which requires significant refactoring.</p><p>Engineers also need to integrate the model into the existing production system, which could be a web application, a mobile app, or an internal tool. To do this, they might use different languages, frameworks, or tools than those used by data scientists. For instance, they could be working with Java, .NET, or Node.js for the backend infrastructure.</p><p>To avoid this complexity, models are often deployed as standalone services using platforms such as Amazon Sagemaker or Google’s Vertex AI. In this setup, an application uses an API to get a prediction from the model, following a request and response pattern. Yet this approach has some drawbacks such as increased latency, limited scalability and the potential for bottlenecks.</p><h3>Possible Solutions</h3><p>When building their prototypes, data scientists need to work in an environment that mirrors the production environment. That way, they can actually see how their models and feature transformations behave on real time data. There also needs to be a back-end platform that makes it easier to integrate an ML model into an <a target="_blank" href="https://quix.io/blog/what-why-how-of-event-driven-programming">event-driven</a> application without requiring the model to run behind a REST API.</p><p>Confluent envisaged Apache Kafka as a tool that would help simplify the deployment and monitoring of ML models by providing a consistent interface for serving predictions, tracking model performance, and updating models as needed. In this decoupled architecture, a service running an ML model could subscribe to a topic, run its predictions, and write those predictions to another topic. Dependent services no longer have to wait for an API request to be completed before they can continue.</p><p>However, given the current tools, creating a service and connecting it to Apache Kafka is beyond the capabilities of most data scientists, even for testing. There needs to be more tooling that simplifies the process of deploying a service that ingests data from Kafka. This is where having a more integrated platform would come in handy. For an example of well integrated products, take Google Cloud. Their Cloud Functions product is tightly integrated with Google Pub/Sub. Another example is AWS where AWS Lambda functions can be connected to Kinesis streams.</p><figure style="max-width:1254pxpx" class="w-richtext-align-fullwidth w-richtext-figure-type-image"><div><img loading="lazy" alt="Examples of user interfaces that integrate tightly with message brokers." src="/portfolio/article-copies/_assets/64c7a7e10c4b94a448a69cd0_examples-of-user-interfaces-135205ff99.webp"/></div></figure><p>Their user interface makes it easy even for novice users to set up a serverless function and have it react to data from a Pub/Sub topic. There needs to be a system with a similar level of usability for Kafka, where the services and the broker are hosted in one environment and can be tightly integrated. </p><p>Another promising challenger is <a target="_blank" href="https://bytewax.io/">Bytewax</a>, which primarily a deployment and management tool for Python functions (though they are continuously adding stream processing features too). Bytewax focuses on providing a platform for deploying, scaling, and monitoring Python functions as services, making it easier to create and manage data processing pipelines. However, you still have to install it and configure it in the cloud environment of your choice which requires some Kubernetes and Docker knowledge. So not exactly a self-serve solution for data scientists.</p><h2>The software code pipeline</h2><figure style="max-width:2717pxpx" class="w-richtext-align-fullwidth w-richtext-figure-type-image"><div><img loading="lazy" alt="A diagram showing the process of software code pipeline." src="/portfolio/article-copies/_assets/64c7a83456b7a95e95a01515_mlworkflow_code-f46b3ea6e6.webp"/></div></figure><p>Once the model has been finalized, it must be integrated into the application code and deployed. The same process applies to the features on which it was trained. ML models often need the most up-to-date values for a feature (such as traffic conditions or weather). These must be continuously calculated in real-time by dedicated processes which provide new features to the model. Following that, the model&#x27;s performance is continuously monitored and logged so that further improvements can be identified.</p><h3>The friction of code integration</h3><p>Data-driven pipelines are applications just like the rest of a back-end architecture (like the front-end). Software engineers have an established set of best practices for any one who contributes to an application needs to adhere to these best practices. But now that data teams are contributing directly to software applications (rather than back-office systems), there’s a culture clash. </p><p>Data scientists especially are often unfamiliar with software engineering best practices or the specific requirements of the application, leading to difficulties when integrating their models into the system. For example, data scientists and engineers may not use version control systems or if they do, it’s often not the same version control system or workflow as the engineers, which leads to difficulties when tracking changes and collaborating on the codebase. Lastly data scientists may not be familiar with deployment techniques or monitoring tools used by engineers, which can lead to challenges when deploying and maintaining models in production environments. Conversely, software engineers might not be familiar with the specific requirements of machine learning models, which can lead to issues during integration and deployment. <br/> </p><h3>Possible Solutions</h3><p>Again, the answer is tightly linked to the solutions provided in the previous two sections. </p><ul role="list"><li>If prototype code did not require translation into another language before it could be integrated into the application, then data scientists and engineers could collaborate on the same code repository. </li><li>If the logic for consuming data from a Kafka topic was easy enough for data scientists to code themselves, they could test how their transformations and machine learning models performed on production workloads. </li><li>If ‌deployment tools were made more accessible, they could also test how their code runs in a test environment that more closely resembles the production environment. </li></ul><p>But data scientists still need to be more integrated into the software development workflow. The challenge is that these practices are often alien to those who don’t write software day in and day out. Nevertheless it is possible to learn them. </p><p>One parallel example is in the technical writing industry. As the <a target="_blank" href="https://www.writethedocs.org/guide/docs-as-code/">docs as code</a> approach became more popular, technical writers found themselves collaborating with software engineers on the same repositories. This forced writers to learn the principles of git, continuous integration and deployment. This practice was aided by a wide range of tools that made it easier to work with Git, such as Visual Studio Code, Github Desktop, and Sourcetree. There are even tools that let you save a file without you being aware that you’re making a Git commit (such as Sparkleshare), not that this is a great practice for versioning code, but you get the idea. It’s now arguably a lot easier than learn software management principles as a non-developer.</p><p>However, there is still large amount fragmentation in toolchain. This problem is less acute for software engineers because, in a sense, the terminal window is their unified interface. Version control, builds and deployments are all managed from the command line. Non-developers, such as data scientists don’t have the benefit of a unified user interface to commit, deploy and monitor their specific code contributions.</p><p>All of these tools are especially important when trying to understand multi-step feature transformations that a ML model depends on in production. Confluent recognized this and released Stream Designer which was designed to complement kqsqlDB, creating a more usable layer of abstraction for building pipelines on top of Apache Kafka. </p><figure style="max-width:1574pxpx" class="w-richtext-align-fullwidth w-richtext-figure-type-image"><div><img loading="lazy" alt="Cloud stream diagram pipeline." src="/portfolio/article-copies/_assets/64c7a889b3f2e76b88df2ee4_ccloud-stream-designer-join-pipelin-1f8059db25.webp"/></div></figure><p>The catch is that it only works with ksqlDB queries—which <a target="_blank" href="https://quix.io/blog/drawbacks-ksqldb-ml-workflows">have their own limitations</a> as we&#x27;ve discussed.  It&#x27;s likely however, that you&#x27;ll soon be able to use Stream Designer with Confluent&#x27;s new managed Flink solution.</p><h2>A fragmented patchwork of solutions</h2><p>At this point, it’s useful to do a recap of all the solutions we’ve discussed a speculate how they could be used together. The ultimate goal being ‌to data scientists more autonomy on optimizing their algorithms and models for production</p><p><strong>Data ingestion</strong> — suffers from code translation friction.</p><ul role="list"><li><strong>Solution</strong>: Let data scientists ‌code feature transformations in pure Python (i.e. not pySpark or PyFlink) using libraries that work just as well for prototyping as they do in production. This would require less code tuning, and it would be easier for data scientists to learn how to tune the code themselves.</li><li><strong>Tools</strong>: Current pure Python stream processing libraries are Faust, Streamz, maybe Bytewax.</li></ul><p><strong>Machine learning pipeline</strong>  — suffers from performance friction.</p><ul role="list"><li><strong>Solution</strong>: data scientists should be able to simulate production environments using tools that abstract away some of the complexity involved in deploying applications. This would enable them to test the performance of their own algorithms and models before handing them over to engineers.</li><li><strong>Tools</strong>: Point-and-click user interfaces that allow you to deploy ‌serverless functions and easily connect them to message brokers and other services without having to worry about IAM roles or Docker configurations. Partial solutions include Google Cloud Functions coupled with Google Pub/Sub, AWS Lambda with Amazon Kinesis, or Confluent ksqlDB with Stream Designer. Another option is Bytewax hosted in any cloud environment (although it doesn’t appear to have its own point-and-click UI). However, all of these are still very complex solutions.</li></ul><p><strong>Software pipeline</strong>  — suffers from integration friction.</p><ul role="list"><li><strong>Solution</strong>: help data scientists learn standard software development practices by allowing them to contribute to the application codebase. Consolidate the application codebase by using the same language and libraries for prototype and production code. Give data scientists simpler tools to work with Git or other version control systems.  </li><li><strong>Tools</strong>: Simplified integrated development environments that allow data scientists to write, run, manage and deploy code from the same place. Visual Studio Code is a popular option, but requires you to set up a local environment first.  GitHub codespaces is built on top of Visual Studio Code enables you to write, run, test, debug, and commit code without the need to configure your local development environment or install dependencies on your local machine.</li></ul><p>Thus, there are tools that can help solve ‌the friction at each stage of the machine learning workflow, but they don’t solve the overall problem of fragmentation in the data stack. </p><h2>Designing a more unified solution</h2><p>What would benefit data scientists and engineers alike is a more unified platform that includes all the features that I’ve outlined above, such as: </p><ul role="list"><li>A pure Python stream processing library that has feature parity with Apache Flink (required for scalability and fault tolerance).<br/> </li><li>A user-friendly cloud IDE that lets data scientists:<br/>— write and test stream processing and ML projects without having to set up a local environment for each one.<br/>— easily commit changes to a Git repo and roll back to previous versions.<br/>— connect to a Kafka broker and choose which topics they want to use as input or output.<br/>— deploy projects as services without being confronted with too many configuration options.<br/> </li><li>A managed cloud environment with visual tools that let data scientists and engineers:<br/>— visualize and edit data pipelines and inspect the data flowing through each connection.<br/>— allocate more resources to specific processes if necessary.<br/>— run ML models that are integrated into pipeline processes rather than behind a REST API in a separate system.</li></ul><p>The closest system to fulfilling this vision so far is Confluent’s ksqlDB. It has an online IDE for SQL queries, a visual tool for designing pipelines, and an easy way to deploy feature transformations. You can even integrate an ML model into a UDF and deploy it to a ksqlDB cluster. It fails however, to ease the friction of code translation (transformations often need porting into Java) and the friction of performance (it doesn’t have all the scalability features of Apache Flink).</p><p>Given the lack of a feasible unified solution, a few colleagues and I decided to build one ourselves. Back when we were still working at McLaren, we needed to create physics models that would predict Formula One race outcomes based on vehicle sensor data. Rather than using a cloud environment, we were hosting and managing Apache Kafka ourselves. This made the development process even more complicated. </p><p>Despite this, we found that we could go into production faster when we were able to stay within the Python ecosystem and simplify the number of disparate technologies we used to train, deploy and run ML models in production. This ultimately led to us creating our own client library for our C# and Python developers. We also built our own cloud enviroment with it’s own UI which went a long way to giving us the unified experience that we wanted.</p><p>It was hard work, but more that worth it.  It showed me how much progress you can make when you dismantle the impedance gap between data teams and engineering teams. If this can happen on a larger scale, it could make the industry for AI-driven software a lot more productive. By working in a more unified manner, data scientists and software engineers can combine their specific skill sets to create more sophisticated data-driven applications. Certainly, many  points of friction can’t be solved with technology alone. There’s a whole other organizational discussion to be had. But I believe that new tools can be the lubricant that allows teams to mesh together like well oiled gears. If technical writers and engineers can do it, data scientists certainly can too!</p><p>For ‌more details on our vision, here’s some further reading:</p><ul role="list"><li><a target="_blank" href="https://quix.io/blog/introducing-quix">Quix | Introducing Quix, a platform that streamlines machine learning…</a></li><li><a target="_blank" href="https://quix.io/blog/real-time-machine-learning-quick-guide">Quix | Your 15-minute guide to real-time machine learning</a></li><li><a target="_blank" href="https://quix.io/blog/build-deploy-traffic-monitoring-app-using-computer-vision">Quix | Build and deploy your own traffic monitoring app using computer vision</a></li></ul></div><div class="blog_last-updated"><div class="text-eyebrow-small text-color-grey">Last updated:</div><div class="text-eyebrow-small">Apr 11, 2024</div></div></div><div class="content_info-component"><div class="content_share-wrapper"><div class="text-size-small text-weight-semibold">Share this article:</div><div class="w-layout-grid content_share"><a aria-label="Copy to clipboard" href="#" class="social-icon-link hide w-inline-block"><div class="content_social-icon w-embed"><svg aria-hidden="true" role="img" width="100%" height="100%" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg"><title>Link</title><path fill-rule="evenodd" clip-rule="evenodd" d="M20.9999 7.66008V8.00008C21.0007 9.06616 20.576 10.0885 19.8199 10.84L16.9999 13.67C16.4738 14.1911 15.6261 14.1911 15.1 13.67L15 13.56C14.8094 13.3656 14.8094 13.0544 15 12.86L18.4399 9.42006C18.807 9.03938 19.0083 8.52883 18.9999 8.00008V7.66008C19.0003 7.12705 18.788 6.61589 18.4099 6.2401L17.7599 5.59011C17.3841 5.21207 16.873 4.99969 16.3399 5.00011H15.9999C15.4669 4.99969 14.9558 5.21207 14.58 5.59011L11.14 9.00007C10.9456 9.19064 10.6344 9.19064 10.44 9.00007L10.33 8.89007C9.8089 8.36394 9.8089 7.51623 10.33 6.99009L13.16 4.15012C13.9165 3.40505 14.9382 2.99133 15.9999 3.00014H16.3399C17.4011 2.9993 18.4191 3.42018 19.1699 4.17012L19.8299 4.83012C20.5798 5.5809 21.0007 6.59891 20.9999 7.66008ZM8.64993 13.94L13.9399 8.65008C14.0338 8.55543 14.1616 8.50218 14.2949 8.50218C14.4282 8.50218 14.556 8.55543 14.6499 8.65008L15.3499 9.35007C15.4445 9.44395 15.4978 9.57175 15.4978 9.70507C15.4978 9.83839 15.4445 9.96618 15.3499 10.0601L10.0599 15.35C9.96604 15.4447 9.83824 15.4979 9.70492 15.4979C9.57161 15.4979 9.44381 15.4447 9.34993 15.35L8.64993 14.65C8.55528 14.5561 8.50204 14.4283 8.50204 14.295C8.50204 14.1617 8.55528 14.0339 8.64993 13.94ZM13.5599 15C13.3655 14.8094 13.0543 14.8094 12.8599 15L9.42993 18.41C9.0517 18.7905 8.53645 19.003 7.99995 18.9999H7.65995C7.12691 19.0004 6.61576 18.788 6.23997 18.41L5.58997 17.76C5.21194 17.3842 4.99956 16.873 4.99998 16.34V16C4.99956 15.4669 5.21194 14.9558 5.58997 14.58L9.00993 11.14C9.2005 10.9456 9.2005 10.6345 9.00993 10.44L8.89993 10.33C8.3738 9.80894 7.52609 9.80894 6.99996 10.33L4.17999 13.16C3.42392 13.9116 2.99916 14.9339 3 16V16.35C3.00182 17.4077 3.42249 18.4216 4.16999 19.1699L4.82998 19.8299C5.58076 20.5799 6.59878 21.0008 7.65995 20.9999H7.99995C9.05338 21.0061 10.0667 20.5964 10.8199 19.8599L13.6699 17.01C14.191 16.4838 14.191 15.6361 13.6699 15.11L13.5599 15Z" fill="CurrentColor"/></svg></div></a><a Title="LinkedIn" aria-label="Share on LinkedIn" fs-socialshare-element="LinkedIn" href="#" class="social-icon-link is-light-bg w-inline-block"><div class="content_social-icon w-embed"><svg width="24" height="25" viewBox="0 0 24 25" fill="none" xmlns="http://www.w3.org/2000/svg">
+<path fill-rule="evenodd" clip-rule="evenodd" d="M2.96792e-07 2.33859C2.96792e-07 1.80681 0.21125 1.2968 0.587278 0.920776C0.963305 0.544749 1.47331 0.333499 2.00509 0.333499H21.9927C22.2563 0.333068 22.5173 0.384622 22.7609 0.485208C23.0045 0.585794 23.2258 0.733437 23.4123 0.919684C23.5987 1.10593 23.7466 1.32712 23.8475 1.5706C23.9483 1.81408 24.0001 2.07505 24 2.33859V22.3262C24.0003 22.5898 23.9486 22.8509 23.8479 23.0945C23.7472 23.3381 23.5994 23.5594 23.4131 23.7458C23.2268 23.9323 23.0055 24.0801 22.762 24.181C22.5184 24.2818 22.2574 24.3336 21.9938 24.3335H2.00509C1.74169 24.3335 1.48086 24.2816 1.23752 24.1808C0.994184 24.0799 0.773096 23.9321 0.586892 23.7458C0.400688 23.5595 0.253017 23.3384 0.152316 23.095C0.0516145 22.8516 -0.000143013 22.5907 2.96792e-07 22.3273V2.33859ZM9.49964 9.48404H12.7495V11.116C13.2185 10.1779 14.4185 9.3335 16.2218 9.3335C19.6789 9.3335 20.4982 11.2022 20.4982 14.631V20.9822H16.9996V15.412C16.9996 13.4593 16.5305 12.3575 15.3393 12.3575C13.6865 12.3575 12.9993 13.5455 12.9993 15.412V20.9822H9.49964V9.48404ZM3.49964 20.8328H6.99927V9.3335H3.49964V20.8317V20.8328ZM7.5 5.58295C7.5066 5.8826 7.45328 6.18054 7.34317 6.4593C7.23306 6.73805 7.06838 6.99201 6.8588 7.20626C6.64921 7.42051 6.39894 7.59074 6.12268 7.70696C5.84641 7.82318 5.54972 7.88304 5.25 7.88304C4.95028 7.88304 4.65359 7.82318 4.37732 7.70696C4.10106 7.59074 3.85079 7.42051 3.6412 7.20626C3.43162 6.99201 3.26694 6.73805 3.15683 6.4593C3.04672 6.18054 2.9934 5.8826 3 5.58295C3.01295 4.99479 3.25569 4.43509 3.67624 4.0237C4.09678 3.61231 4.6617 3.38195 5.25 3.38195C5.8383 3.38195 6.40322 3.61231 6.82376 4.0237C7.24431 4.43509 7.48705 4.99479 7.5 5.58295Z" fill="currentColor"/>
+</svg></div></a><a title="Twitter" aria-label="Share on Twitter" fs-socialshare-element="Twitter" href="#" class="social-icon-link is-light-bg w-inline-block"><div class="content_social-icon w-embed"><svg width="24" height="25" viewBox="0 0 24 25" fill="none" xmlns="http://www.w3.org/2000/svg">
+<path d="M13.969 10.4906L22.7069 0.333496H20.6363L13.0491 9.1528L6.9893 0.333496H0L9.16366 13.6698L0 24.3212H2.07073L10.083 15.0077L16.4826 24.3212H23.4719L13.9684 10.4906H13.969ZM11.1328 13.7873L10.2043 12.4593L2.81684 1.89231H5.99736L11.9592 10.4202L12.8876 11.7482L20.6373 22.8333H17.4567L11.1328 13.7879V13.7873Z" fill="currentColor"/></svg></div></a><a title="Facebook" aria-label="Share on Facebook" fs-socialshare-element="Facebook" href="#" class="social-icon-link is-light-bg w-inline-block"><div class="content_social-icon w-embed"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+<g clip-path="url(#clip0_441_1978)">
+<path d="M24 12.3335C24 5.70614 18.6274 0.333496 12 0.333496C5.37264 0.333496 0 5.70614 0 12.3335C0 17.961 3.87456 22.6833 9.10128 23.9802V16.0007H6.62688V12.3335H9.10128V10.7533C9.10128 6.66902 10.9498 4.7759 14.9597 4.7759C15.72 4.7759 17.0318 4.92518 17.5685 5.07398V8.39798C17.2853 8.36822 16.7933 8.35334 16.1822 8.35334C14.2147 8.35334 13.4544 9.09878 13.4544 11.0365V12.3335H17.3741L16.7006 16.0007H13.4544V24.2457C19.3963 23.5281 24.0005 18.4689 24.0005 12.3335H24Z" fill="currentColor"/>
+</g>
+<defs>
+<clipPath id="clip0_441_1978">
+<rect width="24" height="24" fill="white" transform="translate(0 0.333496)"/>
+</clipPath>
+</defs>
+</svg></div></a></div></div><div class="content_author-bio-wrapper hide"><div class="content_author-wrapper"><div class="blog_author-image-wrapper"><img loading="eager" width="64" height="64" src="/portfolio/article-copies/_assets/64b12fcc061c5fcdf05c67fd_Mike-Rosam-429d3941a0.webp" alt="Mike Rosam" class="blog_author-image"/></div><div class="content_author-text"><div class="content_author-title"><div class="text-size-small text-weight-semibold">Words by </div><div class="text-size-small text-weight-semibold">Mike Rosam</div></div><div class="text-size-small text-weight-semibold text-color-grey">CEO &amp; Co-Founder</div></div></div><p class="text-size-small text-color-grey">Mike Rosam is Co-Founder and CEO at Quix, where he works at the intersection of business and technology to pioneer the world&#x27;s first streaming data development platform. He was previously Head of Innovation at McLaren Applied, where he led the data analytics product line. Mike has a degree in Mechanical Engineering and an MBA from Imperial College London.</p></div><div class="content_cta-wrapper padding-0"><div class="content_cta background-color-dark-blue w-condition-invisible"><div class="content_cta-text-and-button"><div class="content_cta-text-wrapper"><h4 class="text-color-white heading-style-h3">Guide to the Event-Driven, Event Streaming Stack</h4><div class="text-color-white-70 text-size-medium">Practical insights into event-driven technologies for developers and software architects</div></div><a rel="noopener" href="https://quix.io/event-driven-event-streaming-guide" class="button-primary is-full-width-mobile w-button">Get the guide</a></div><img src="/portfolio/article-copies/_assets/655c97f405a7cbcd775ff738_Event-20streaming-20stack-20cover-2-88ab5a450b.avif" loading="lazy" alt="" class="content_cta-image"/></div><div class="content_cta-quix-streams w-condition-invisible"><div class="card_content-left background-color-deep-blue"><div class="text-align-left"><h3>Check out the repo</h3><div class="spacer-small"></div><p class="text-size-small-mobile text-opacity-70">Our Python client library is open source, and brings DataFrames and the Python ecosystem to stream processing.</p></div><div class="button_wrapper align-left"><a data-wf--button-secondary--variant="light" href="https://github.com/quixio/quix-streams" target="_blank" class="button-secondary w-variant-5e011451-3ce1-29e8-cd7b-8f2e2c5bff32 w-button">Star us on GitHub</a></div></div><div class="card-image-horizontal-wrapper"><img src="/portfolio/article-copies/_assets/65df7c8a175b3b6f248cdbe5_Quix-20Streams-20GitHub-62529f17e4.avif" loading="lazy" alt="" class="card-image-right"/></div></div><div class="content_cta-quix-streams"><div class="card_content-left background-color-deep-blue"><div class="text-align-left"><h3>Interested in Quix Cloud?</h3><div class="spacer-small"></div><p class="text-size-regular text-color-white-70">Take a look around and explore the features of our platform.</p></div><a href="https://github.com/quixio/quix-streams" target="_blank" rel="noopener" class="button-primary is-small is-auto-width is-secondary-light w-button">Explore platform</a></div><div class="card-image-horizontal-wrapper"><img src="/portfolio/article-copies/_assets/66d9e151e06b58b7d194b01e_Quix-20Cloud-20mockup-b0575d7b1d.webp" loading="lazy" alt="" class="card-image-right"/></div></div><div class="content_cta-quix-streams w-condition-invisible"><div class="card_content-left background-color-deep-blue"><div class="text-align-left"><h3>Interested in Quix Cloud?</h3><div class="spacer-small"></div><p class="text-size-regular text-color-white-70">Take a look around and explore the features of our platform.</p></div><a href="https://quix.io/quix-cloud" rel="noopener" class="button-primary is-small is-auto-width is-secondary-light w-button">See product features</a></div><div class="card-image-horizontal-wrapper"><img src="/portfolio/article-copies/_assets/66d9e151e06b58b7d194b01e_Quix-20Cloud-20mockup-b0575d7b1d.webp" loading="lazy" alt="" class="card-image-right"/></div></div><div class="blog_intro-banner is-article-footer w-condition-invisible"><div class="section_cta"><div class="cta_card is-blog-banner"><div class="cta-card_content-left"><div class="max-width-xlarge"><h4>Data integration, simplified</h4><div class="spacer-small"></div><p class="text-size-small text-color-grey">Ingest, pre-process and load high volumes of data into any database, lake or warehouse, without overloading your systems or budgets.</p></div></div><div class="button-group is-full-width-mobile is-vertical-2"><a href="https://share.hsforms.com/1iW0TmZzKQMChk0lxd_tGiw4yjw2" rel="noopener" target="_blank" class="button-primary is-secondary is-xsmall is-flex-grow-mobile w-button">Book a demo</a></div></div></div></div><div class="blog_intro-banner is-article-footer"><div class="section_cta"><div class="cta_card is-blog-banner"><div class="cta-card_content-left"><div class="max-width-xlarge"><h4>Python stream processing, simplified</h4><div class="spacer-small"></div><p class="text-size-small text-color-grey">Pure Python. No JVM. No wrappers. No cross-language debugging. Use streaming DataFrames and the whole Python ecosystem to build stream processing applications.</p></div></div><div class="button-group is-full-width-mobile is-vertical-2"><a href="https://github.com/quixio/quix-streams" rel="noopener" target="_blank" class="button-primary is-secondary is-xsmall is-flex-grow-mobile w-button">Quix Streams repo</a></div></div></div></div><div class="blog_intro-banner is-article-footer w-condition-invisible"><div class="section_cta"><div class="cta_card is-blog-banner"><div class="cta-card_content-left"><div class="max-width-xlarge"><h4>Python stream processing, simplified</h4><div class="spacer-small"></div><p class="text-size-small text-color-grey">Pure Python. No JVM. No wrappers. No cross-language debugging. Use streaming DataFrames and the whole Python ecosystem to build stream processing applications.</p></div></div><div class="button-group is-full-width-mobile is-vertical-2"><a href="https://github.com/quixio/quix-streams" rel="noopener" target="_blank" class="button-primary is-secondary is-xsmall is-flex-grow-mobile w-button">Quix Streams repo</a></div></div></div></div><div class="content_cta background-color-dark-blue is-article-footer w-condition-invisible"><div class="content_cta-text-and-button"><div class="content_cta-text-wrapper"><h4 class="text-color-white heading-style-h3">The 4 Pillars of a Successful AI Strategy</h4><div class="text-color-white-70 text-size-regular">Foundational strategies that leading companies use to overcome common obstacles and achieve sustained AI success.</div></div><a rel="noopener" href="https://quix.io/4-pillars-of-successful-ai-strategy-guide" class="button-primary is-small is-full-width-mobile w-button">Get the guide</a></div><img src="/portfolio/article-copies/_assets/673f39296a681ce570f11cea_4-20pillars-20guide-20cover-20mock-380645e63f.webp" loading="lazy" alt="" class="content_cta-image"/></div><div class="content_cta background-color-dark-blue is-article-footer w-condition-invisible"><div class="content_cta-text-and-button"><div class="content_cta-text-wrapper"><h4 class="text-color-white heading-style-h3">Guide to the Event-Driven, Event Streaming Stack</h4><div class="text-color-white-70">Practical insights into event-driven technologies for developers and software architects.</div></div><a rel="noopener" href="https://quix.io/event-driven-event-streaming-guide" class="button-primary is-small is-full-width-mobile w-button">Get the guide</a></div><img src="/portfolio/article-copies/_assets/655c97f405a7cbcd775ff738_Event-20streaming-20stack-20cover-2-88ab5a450b.avif" loading="lazy" alt="" class="content_cta-image"/></div></div></div></div></div></div></div></section><section class="section_related-articles"><div class="padding-global"><div class="container-medium"><div class="section-content-wrapper-v2"><div class="related-items_heading-wrapper border-bottom-none"><div class="related-items_heading"><h2 class="heading-style-h3">Related articles</h2></div><div class="related-items_button-group hide-mobile-portrait"><a href="https://quix.io/blog" class="button-secondary is-icon is-xsmall w-inline-block"><div>View all</div><div class="icon-embed-xxsmall w-embed"><svg width="16" height="16" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg">
+<path d="M8.0013 2.6665L7.06797 3.59984L10.8013 7.33317H2.66797V8.6665H10.8013L7.06797 12.3998L8.0013 13.3332L13.3346 7.99984L8.0013 2.6665Z" fill="currentColor"/>
+</svg></div></a></div></div><div class="blog_list-wrapper w-dyn-list"><div role="list" class="blog_list is-3-cards w-dyn-items"><div role="listitem" class="blog_item is-3-cards w-dyn-item"><a data-w-id="9ca4d9c0-e75b-880b-c337-a2cc62dbc595" href="https://quix.io/blog/using-ai-to-accelerate-rotor-balancing-throughput-and-reduce-capex-by-30" class="card-with-image_wrapper w-inline-block"><div aria-label="Link to blog article" class="card_image-padding-wrapper"><div class="card_image-wrapper-3-2"><img height="262" loading="lazy" width="393" src="/portfolio/article-copies/_assets/6a0f2bf42df42ab8ab18f055_RotorBlogImage_v2-0e7fa9e867.jpg" alt="banner for article &quot;Has F1 become too software defined?&quot;" class="card_main-image is-position-absolute"/></div></div><div class="card_main-content"><div class="card_info-group"><div class="card_tag background-color-blue"><div>Industry insights</div></div><div class="text-color-grey">May 21, 2026</div></div><h3 class="heading-style-h5">Using AI to accelerate rotor balancing throughput and reduce capex by 30%</h3><div class="text-size-small-mobile text-color-grey">Discover the three pillars of a successful AI strategy to reduce balancing runs, accelerate rotor throughput and cut capital expenditure.</div></div><div class="blog_author-wrapper"><div class="blog_author-image-wrapper"><img loading="lazy" alt="Mike Rosam" src="/portfolio/article-copies/_assets/64b12fcc061c5fcdf05c67fd_Mike-Rosam-429d3941a0.webp" class="blog_author-image"/></div><div class="blog_author-text"><div class="text-size-small text-weight-semibold">Mike Rosam</div><div class="text-size-small text-color-grey">CEO &amp; Co-Founder</div></div></div></a></div><div role="listitem" class="blog_item is-3-cards w-dyn-item"><a data-w-id="9ca4d9c0-e75b-880b-c337-a2cc62dbc595" href="https://quix.io/blog/has-f1-become-too-software-defined" class="card-with-image_wrapper w-inline-block"><div aria-label="Link to blog article" class="card_image-padding-wrapper"><div class="card_image-wrapper-3-2"><img height="262" loading="lazy" width="393" src="/portfolio/article-copies/_assets/69fc669699b9b5cdc41e9e6a_verstappen_blog_banner_crv2-a88a127fab.jpg" alt="banner for article &quot;Has F1 become too software defined?&quot;" class="card_main-image is-position-absolute"/></div></div><div class="card_main-content"><div class="card_info-group"><div class="card_tag background-color-blue"><div>Industry insights</div></div><div class="text-color-grey">May 7, 2026</div></div><h3 class="heading-style-h5">Has F1 become too software defined?</h3><div class="text-size-small-mobile text-color-grey">Software is ruining F1 for drivers &amp; fans by replacing skill with automated control, but the same kind of automation is empowering engineers&#x27; competitive R&amp;D.</div></div><div class="blog_author-wrapper"><div class="blog_author-image-wrapper"><img loading="lazy" alt="Mike Rosam" src="/portfolio/article-copies/_assets/64b12fcc061c5fcdf05c67fd_Mike-Rosam-429d3941a0.webp" class="blog_author-image"/></div><div class="blog_author-text"><div class="text-size-small text-weight-semibold">Mike Rosam</div><div class="text-size-small text-color-grey">CEO &amp; Co-Founder</div></div></div></a></div><div role="listitem" class="blog_item is-3-cards w-dyn-item"><a data-w-id="9ca4d9c0-e75b-880b-c337-a2cc62dbc595" href="https://quix.io/blog/why-infrastructure-not-models-is-driving-industrial-ai-adoption" class="card-with-image_wrapper w-inline-block"><div aria-label="Link to blog article" class="card_image-padding-wrapper"><div class="card_image-wrapper-3-2"><img height="262" loading="lazy" width="393" src="/portfolio/article-copies/_assets/69eb210800c4a458232a846a_omni-f008f60a-82a5-4e9f-81dc-9db4f3-6e93b983e2.jpg" alt="Banner image for article &quot;Why infrastructure, not models, is driving industrial AI adoption&quot;" class="card_main-image is-position-absolute"/></div></div><div class="card_main-content"><div class="card_info-group"><div class="card_tag background-color-blue"><div>Industry insights</div></div><div class="text-color-grey">Apr 24, 2026</div></div><h3 class="heading-style-h5">Why infrastructure, not models, is driving industrial AI adoption</h3><div class="text-size-small-mobile text-color-grey">Industrial AI gains aren&#x27;t coming from frontier LLMs, they&#x27;re coming from traditional AI models. Better infrastructure is now making these models usable.</div></div><div class="blog_author-wrapper"><div class="blog_author-image-wrapper"><img loading="lazy" alt="Mike Rosam" src="/portfolio/article-copies/_assets/64b12fcc061c5fcdf05c67fd_Mike-Rosam-429d3941a0.webp" class="blog_author-image"/></div><div class="blog_author-text"><div class="text-size-small text-weight-semibold">Mike Rosam</div><div class="text-size-small text-color-grey">CEO &amp; Co-Founder</div></div></div></a></div></div></div><div class="related-items_button-group hide-desktop"><a href="https://quix.io/blog" class="button-secondary is-icon is-xsmall w-inline-block"><div>View all</div><div class="icon-embed-xxsmall w-embed"><svg width="16" height="16" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg">
+<path d="M8.0013 2.6665L7.06797 3.59984L10.8013 7.33317H2.66797V8.6665H10.8013L7.06797 12.3998L8.0013 13.3332L13.3346 7.99984L8.0013 2.6665Z" fill="currentColor"/>
+</svg></div></a></div><div class="spacer-xlarge is-border-lr hide-mobile-portrait"></div></div></div></div></section></main><footer class="footer_component-new"><div class="footer_content-top-wrapper"><div class="footer_content-top"><a href="#" Title="Quix Homepage" arial-label="Link to Homepage" class="footer_logo-link w-nav-brand"><img width="60" height="60" alt="Quix company icon in monochrome white" src="/portfolio/article-copies/_assets/68e647c56bd82eb9518af94c_Quix-20icon-20logo-202025-20--20Whi-3c98d3d08b.svg" loading="lazy" class="footer_logo-image"/><div class="hide">Quix Homepage</div></a><div class="footer_social-icon-block-2"><a rel="noopener" aria-label="Quix LinkedIn link" Title="Quix LinkedIn" href="https://www.linkedin.com/company/quix-io" target="_blank" class="social-icon-link w-inline-block"><div class="footer_social-icon-2 w-embed"><svg width="100%" height="100%" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+<path fill-rule="evenodd" clip-rule="evenodd" d="M2.96792e-07 2.00509C2.96792e-07 1.47331 0.21125 0.963308 0.587278 0.58728C0.963305 0.211253 1.47331 2.67307e-06 2.00509 2.67307e-06H21.9927C22.2563 -0.000427747 22.5173 0.0511258 22.7609 0.151712C23.0045 0.252298 23.2258 0.399941 23.4123 0.586188C23.5987 0.772435 23.7466 0.993628 23.8475 1.2371C23.9483 1.48058 24.0001 1.74156 24 2.00509V21.9927C24.0003 22.2563 23.9486 22.5174 23.8479 22.761C23.7472 23.0046 23.5994 23.2259 23.4131 23.4123C23.2268 23.5988 23.0055 23.7466 22.762 23.8475C22.5184 23.9483 22.2574 24.0001 21.9938 24H2.00509C1.74169 24 1.48086 23.9481 1.23752 23.8473C0.994184 23.7464 0.773096 23.5986 0.586892 23.4123C0.400688 23.226 0.253017 23.0049 0.152316 22.7615C0.0516145 22.5181 -0.000143013 22.2572 2.96792e-07 21.9938V2.00509ZM9.49964 9.15055H12.7495V10.7825C13.2185 9.84437 14.4185 9 16.2218 9C19.6789 9 20.4982 10.8687 20.4982 14.2975V20.6487H16.9996V15.0785C16.9996 13.1258 16.5305 12.024 15.3393 12.024C13.6865 12.024 12.9993 13.212 12.9993 15.0785V20.6487H9.49964V9.15055ZM3.49964 20.4993H6.99927V9H3.49964V20.4982V20.4993ZM7.5 5.24946C7.5066 5.5491 7.45328 5.84704 7.34317 6.1258C7.23306 6.40456 7.06838 6.65851 6.8588 6.87276C6.64921 7.08702 6.39894 7.25725 6.12268 7.37346C5.84641 7.48968 5.54972 7.54955 5.25 7.54955C4.95028 7.54955 4.65359 7.48968 4.37732 7.37346C4.10106 7.25725 3.85079 7.08702 3.6412 6.87276C3.43162 6.65851 3.26694 6.40456 3.15683 6.1258C3.04672 5.84704 2.9934 5.5491 3 5.24946C3.01295 4.6613 3.25569 4.10159 3.67624 3.69021C4.09678 3.27882 4.6617 3.04846 5.25 3.04846C5.8383 3.04846 6.40322 3.27882 6.82376 3.69021C7.24431 4.10159 7.48705 4.6613 7.5 5.24946Z" fill="currentColor"/>
+</svg></div><div class="hide">LinkedIn</div></a><a Title="Quix Twitter" rel="noopener" aria-label="Quix Twitter link" href="https://twitter.com/Quix_io" target="_blank" class="social-icon-link w-inline-block"><div class="footer_social-icon-2 w-embed"><svg width="100%" height="100%" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+<path d="M13.969 10.1571L22.7069 0H20.6363L13.0491 8.81931L6.9893 0H0L9.16366 13.3364L0 23.9877H2.07073L10.083 14.6742L16.4826 23.9877H23.4719L13.9684 10.1571H13.969ZM11.1328 13.4538L10.2043 12.1258L2.81684 1.55881H5.99736L11.9592 10.0867L12.8876 11.4147L20.6373 22.4998H17.4567L11.1328 13.4544V13.4538Z" fill="currentColor"/>
+</svg></div><div class="hide">Twitter</div></a><a rel="noopener" aria-label="Quix YouTube link" Title="Quix YouTube" href="https://www.youtube.com/channel/UCrijXvbQg67m9-le28c7rPA" target="_blank" class="social-icon-link w-inline-block"><div class="footer_social-icon-2 w-embed"><svg aria-hidden="true" role="img" fill="currentColor" width="100%" height="100%" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg"><title>YouTube</title><path fill-rule="evenodd" clip-rule="evenodd" d="M18.5399 4.33992L19.9999 4.48992C21.7284 4.68529 23.0264 6.16064 22.9999 7.89992V16.0999C23.0264 17.8392 21.7284 19.3146 19.9999 19.5099L18.5999 19.6599C14.2315 20.1099 9.82835 20.1099 5.45991 19.6599L3.99991 19.5099C2.27143 19.3146 0.973464 17.8392 0.999909 16.0999V7.89992C0.973464 6.16064 2.27143 4.68529 3.99991 4.48992L5.39991 4.33992C9.76835 3.88995 14.1715 3.88995 18.5399 4.33992ZM11.1099 15.2199L14.9999 12.6199H15.0599C15.2695 12.4833 15.3959 12.2501 15.3959 11.9999C15.3959 11.7497 15.2695 11.5165 15.0599 11.3799L11.1699 8.77992C10.9402 8.62469 10.6437 8.60879 10.3987 8.73859C10.1538 8.86839 10.0004 9.12271 9.99991 9.39992V14.5999C10.0128 14.858 10.1576 15.0913 10.3832 15.2173C10.6088 15.3433 10.8834 15.3443 11.1099 15.2199Z"/></svg></div><div class="hide">Youtube</div></a><a rel="noopener" aria-label="Quix Slack link" Title="Quix Slack" href="https://quix.io/slack-invite" target="_blank" class="social-icon-link w-inline-block"><div class="footer_social-icon-2 w-embed"><svg aria-hidden="true" role="img" fill="currentColor" width="100%" height="100%" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><title>Slack</title><path d="M5.042 15.165a2.528 2.528 0 0 1-2.52 2.523A2.528 2.528 0 0 1 0 15.165a2.527 2.527 0 0 1 2.522-2.52h2.52v2.52zM6.313 15.165a2.527 2.527 0 0 1 2.521-2.52 2.527 2.527 0 0 1 2.521 2.52v6.313A2.528 2.528 0 0 1 8.834 24a2.528 2.528 0 0 1-2.521-2.522v-6.313zM8.834 5.042a2.528 2.528 0 0 1-2.521-2.52A2.528 2.528 0 0 1 8.834 0a2.528 2.528 0 0 1 2.521 2.522v2.52H8.834zM8.834 6.313a2.528 2.528 0 0 1 2.521 2.521 2.528 2.528 0 0 1-2.521 2.521H2.522A2.528 2.528 0 0 1 0 8.834a2.528 2.528 0 0 1 2.522-2.521h6.312zM18.956 8.834a2.528 2.528 0 0 1 2.522-2.521A2.528 2.528 0 0 1 24 8.834a2.528 2.528 0 0 1-2.522 2.521h-2.522V8.834zM17.688 8.834a2.528 2.528 0 0 1-2.523 2.521 2.527 2.527 0 0 1-2.52-2.521V2.522A2.527 2.527 0 0 1 15.165 0a2.528 2.528 0 0 1 2.523 2.522v6.312zM15.165 18.956a2.528 2.528 0 0 1 2.523 2.522A2.528 2.528 0 0 1 15.165 24a2.527 2.527 0 0 1-2.52-2.522v-2.522h2.52zM15.165 17.688a2.527 2.527 0 0 1-2.52-2.523 2.526 2.526 0 0 1 2.52-2.52h6.313A2.527 2.527 0 0 1 24 15.165a2.528 2.528 0 0 1-2.522 2.523h-6.313z"/></svg></div><div class="hide">Slack</div></a><a rel="noopener" aria-label="Quix Slack link" Title="Quix Slack" href="https://github.com/quixio/quix-streams" target="_blank" class="social-icon-link w-inline-block"><div class="footer_social-icon-2 w-embed"><svg width=" 100%" height=" 100%" viewBox="0 0 25 24" role='img' fill="none" xmlns="http://www.w3.org/2000/svg"><title>Github</title><g clip-path="url(#clip0_4958_684)"><path fill-rule="evenodd" clip-rule="evenodd" d="M12.5099 0C5.86875 0 0.5 5.40833 0.5 12.0992C0.5 17.4475 3.93994 21.9748 8.71205 23.5771C9.30869 23.6976 9.52724 23.3168 9.52724 22.9965C9.52724 22.716 9.50757 21.7545 9.50757 20.7527C6.1667 21.474 5.47099 19.3104 5.47099 19.3104C4.93409 17.9082 4.13858 17.5478 4.13858 17.5478C3.04511 16.8066 4.21823 16.8066 4.21823 16.8066C5.43117 16.8868 6.06763 18.0486 6.06763 18.0486C7.14118 19.8913 8.87111 19.3707 9.56706 19.0501C9.66638 18.2688 9.98473 17.728 10.3228 17.4276C7.65817 17.1471 4.85469 16.1055 4.85469 11.458C4.85469 10.1359 5.3316 9.05428 6.08729 8.21304C5.96807 7.91263 5.5504 6.67043 6.20677 5.00787C6.20677 5.00787 7.22083 4.6873 9.50732 6.24981C10.4863 5.98497 11.4958 5.85024 12.5099 5.84911C13.524 5.84911 14.5577 5.98948 15.5123 6.24981C17.799 4.6873 18.8131 5.00787 18.8131 5.00787C19.4695 6.67043 19.0515 7.91263 18.9323 8.21304C19.7079 9.05428 20.1652 10.1359 20.1652 11.458C20.1652 16.1055 17.3617 17.1269 14.6772 17.4276C15.1148 17.8081 15.4924 18.5292 15.4924 19.6711C15.4924 21.2936 15.4727 22.5957 15.4727 22.9962C15.4727 23.3168 15.6915 23.6976 16.2879 23.5774C21.06 21.9745 24.4999 17.4475 24.4999 12.0992C24.5196 5.40833 19.1312 0 12.5099 0Z" fill="currentColor"/></g><defs><clipPath id="clip0_4958_684"><rect width="24" height="24" fill="currentColor" transform="translate(0.5)"/></clipPath></defs></svg></div><div class="hide">Slack</div></a></div></div></div><div class="footer_content-menu-wrapper"><div class="w-layout-grid footer_content-menu"><div class="footer_link-list"><div class="text-size-small text-weight-semibold">Product</div><a href="https://quix.io/quix-cloud" class="footer_link is-first">Quix Cloud</a><a href="https://quix.io/quix-streams" class="footer_link">Quix Streams</a><a href="https://quix.io/integrations" class="footer_link">Integrations</a><a href="https://quix.io/pricing" class="footer_link">Pricing</a><a href="https://quix.io/book-a-demo" class="footer_link">Book a demo</a></div><div class="footer_link-list"><div class="text-size-small text-weight-semibold">Developers</div><a rel="noopener" href="https://quix.io/docs/" target="_blank" class="footer_link is-first">Docs</a><a rel="noopener" href="https://github.com/quixio/quix-streams" target="_blank" class="footer_link">Quix Streams repo</a><a href="https://quix.io/blog?category=Releases" class="footer_link">Release notes</a><a rel="noopener" href="https://status.quix.io/" target="_blank" class="footer_link">Service status</a><a href="https://login.quix.io/" target="_blank" class="footer_link is-icon-link w-inline-block"><div>Platform login</div><div class="icon-embed-xsmall w-embed"><svg width="16" height="16" viewBox="0 0 16 16" fill="#3d89ff" xmlns="http://www.w3.org/2000/svg">
+<path d="M7.33594 4.66667L6.4026 5.6L8.13594 7.33333H1.33594V8.66667H8.13594L6.4026 10.4L7.33594 11.3333L10.6693 8L7.33594 4.66667ZM13.3359 12.6667H8.0026V14H13.3359C14.0693 14 14.6693 13.4 14.6693 12.6667V3.33333C14.6693 2.6 14.0693 2 13.3359 2H8.0026V3.33333H13.3359V12.6667Z"/>
+</svg></div></a></div><div class="footer_link-list"><div class="text-size-small text-weight-semibold">Solutions</div><a rel="noopener" href="https://quix.io/templates" class="footer_link is-first">Project templates</a><a rel="noopener" href="https://quix.io/application-templates" class="footer_link">App templates</a><a rel="noopener" href="https://quix.io/customer-stories" class="footer_link">Customer stories</a><a rel="noopener" href="https://quix.io/use-cases/energy" class="footer_link">Energy industry</a><a rel="noopener" href="https://quix.io/use-cases/manufacturing" class="footer_link">Manufacturing industry</a></div><div class="footer_link-list"><div class="text-size-small text-weight-semibold">Community</div><a rel="noopener" href="https://quix.io/community" class="footer_link is-first">Community hub</a><a rel="noopener" href="https://quix.io/events" class="footer_link">Events</a><a rel="noopener" href="https://quix.io/contributing" class="footer_link">Contributing</a><a rel="noopener" href="https://quix.io/slack-invite" target="_blank" class="footer_link">Join us on Slack</a></div><div class="footer_link-list"><div class="text-size-small text-weight-semibold">Resources</div><a rel="noopener" href="https://quix.io/resources" class="footer_link is-first">Resources hub</a><a rel="noopener" href="https://quix.io/blog" class="footer_link">Blog</a><a rel="noopener" href="https://quix.io/resources#webinars" class="footer_link">Webinars &amp; videos</a><a rel="noopener" href="https://quix.io/glossary" class="footer_link">Glossary</a><a rel="noopener" href="https://quix.io/docs/manage/security.html" target="_blank" class="footer_link">Cloud security principles</a></div><div class="footer_link-list"><div class="text-size-small text-weight-semibold">Company</div><a href="https://quix.io/company" class="footer_link is-first">About us</a><a href="https://quix.io/careers" class="footer_link">Careers</a><a href="https://quix.io/diversity-and-inclusion" class="footer_link">Diversity &amp; inclusion</a><a href="https://quix.io/environmental-statement" class="footer_link">Environmental statement</a></div></div></div><div class="footer_content-bottom-wrapper"><div class="footer_content-bottom-2"><div class="footer_bottom-text-block-2"><div class="footer_credit-text">© 2025 Quix Analytics</div><div class="w-layout-grid footer_legal-list"><a href="https://quix.io/terms-and-conditions" class="footer_legal-link-2">Terms</a><a href="https://quix.io/privacy" class="footer_legal-link-2">Privacy</a><a href="https://quix.io/license-terms" target="_blank" class="footer_legal-link-2">License Terms</a></div></div><div class="footer_bottom-badges"><a href="https://uk.mathworks.com/products/connections/product_detail/quix-cloud.html" target="_blank" class="footer_partner-badge w-inline-block"><img src="/portfolio/article-copies/_assets/69d684849d7ff3339f788620_mw-partner-badge-rgb-fullcolor-rev-8ab43b7b83.png" loading="lazy" alt="" class="partner-badge_image is-small"/></a><a href="https://cvs.babcert.com/babcert.asp?c=251068&amp;v=h87v3j2wo8" target="_blank" class="footer_iso-certification-2 w-inline-block"><div>ISO27001<br/>certified</div><img loading="lazy" src="/portfolio/article-copies/_assets/656de9b1753e259da9d1c8bd_27001-20RGB-20White-86f3dfe2c0.png" alt="ISO 27001 Information Security Management certification mark" class="partner-badge_image"/></a></div></div></div></footer></div><script src="/portfolio/article-copies/_assets/jquery-3.5.1.min.dc5e7f18c8-e1367554c6.js" type="text/javascript" crossorigin="anonymous"></script><script src="/portfolio/article-copies/_assets/webflow.schunk.f2efb3c5440a81cf-82beaa9ff2.js" type="text/javascript" crossorigin="anonymous"></script><script src="/portfolio/article-copies/_assets/webflow.schunk.a5fcf7dbedce9eac-754483c324.js" type="text/javascript" crossorigin="anonymous"></script><script src="/portfolio/article-copies/_assets/webflow.schunk.f20df4446b6662ba-0a0ace9896.js" type="text/javascript" crossorigin="anonymous"></script><script src="/portfolio/article-copies/_assets/webflow.b4a7f6b8.16d1f03d3716dc30-42778839e8.js" type="text/javascript" crossorigin="anonymous"></script>
+
+<script src="/portfolio/article-copies/_assets/showdown.min-a349086a6e.js"></script>
+<script type="text/javascript">
+  var Webflow = Webflow || [];
+
+	Webflow.push(function () {
+    let converter = new showdown.Converter({
+      tables: true, // allow tables
+      noHeaderId: true,
+      headerLevelStart: 2,
+      literalMidWordUnderscores: true
+    });
+
+    // Find <markdown> elements
+    let markdowns = $('markdown');
+    
+    if (markdowns) {
+      markdowns.toArray().forEach((el) => {
+        el.outerHTML = converter.makeHtml(el.innerHTML);
+      });
+    }
+  });
+</script>
+<script type="text/javascript">
+! function(e, t) {
+    "object" == typeof exports && "object" == typeof module ? module.exports = t() : "function" == typeof define && define.amd ? define([], t) : "object" == typeof exports ? exports.WebflowTools = t() : e.WebflowTools = t()
+}(self, (function() {
+    return function() {
+        "use strict";
+        var e = document.querySelector("[time-to-read]"),
+            t = null == e ? void 0 : e.getAttribute("time-to-read"),
+            o = t ? document.querySelector(t).innerText : null;
+        return e && (e.innerHTML = String(function(e) {
+            if (e) {
+                var t = e.split(/\s/g).filter((function(e) {
+                    return "" !== e
+                })).length / 250;
+                return Math.ceil(t)
+            }
+        }(o))), {}
+    }()
+}));
+</script><script src="/portfolio/article-copies/_assets/form-124-c9175b9dcc.js" type="text/javascript" crossorigin="anonymous"></script></body></html>
