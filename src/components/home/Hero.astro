@@ -5,11 +5,14 @@
 <section class="hero-section">
   <div class="hero-text">
     <div class="greeting">Hello, This is</div>
-    <div class="hero-name">Nagare</div>
+    <div class="hero-name">Merlin Carter</div>
     <div class="hero-description">
       A portfolio website template, <br />
       featuring <em>simplicity</em>, <em>beauty</em> and <em>clarity</em>.
     </div>
+  </div>
+  <div class="hero-portrait" aria-hidden="false">
+    <img src="/portrait.webp" alt="Portrait of Merlin Carter" />
   </div>
 </section>
 
@@ -36,14 +39,15 @@
   .hero-section {
     min-height: 100vh;
     display: flex;
-    justify-content: flex-start;
+    justify-content: space-between;
     align-items: center;
-    padding-left: 10%;
+    gap: clamp(2rem, 6vw, 7rem);
+    padding: 0 10%;
     box-sizing: border-box;
   }
 
   .hero-text {
-    max-width: 80%;
+    max-width: 620px;
     transform: translateY(-5vh);
   }
 
@@ -78,5 +82,65 @@
 
   .hero-description em {
     font-weight: 600;
+  }
+
+  .hero-portrait {
+    position: relative;
+    isolation: isolate;
+    flex: 0 0 auto;
+    width: calc(clamp(230px, 31vw, 440px) * 1.32);
+    aspect-ratio: 1 / 1.06;
+    transform: translate(-55px, -5vh);
+    opacity: 0;
+    animation: unblurFadeIn 2.4s ease-out 1.1s forwards;
+    -webkit-mask-image: url("data:image/svg+xml,%3Csvg%20xmlns='http://www.w3.org/2000/svg'%20viewBox='0%200%20240%20240'%3E%3Cdefs%3E%3Cfilter%20id='f'%20x='-30%25'%20y='-30%25'%20width='160%25'%20height='160%25'%3E%3CfeGaussianBlur%20stdDeviation='15.5'/%3E%3C/filter%3E%3C/defs%3E%3Cpath%20d='M70,52%20C110,28%20165,30%20192,72%20C214,104%20200,150%20165,182%20C140,205%2095,210%2072,188%20C44,166%2040,110%2055,78%20C60,64%2062,58%2070,52%20Z'%20fill='%23000'%20filter='url(%23f)'/%3E%3C/svg%3E");
+    mask-image: url("data:image/svg+xml,%3Csvg%20xmlns='http://www.w3.org/2000/svg'%20viewBox='0%200%20240%20240'%3E%3Cdefs%3E%3Cfilter%20id='f'%20x='-30%25'%20y='-30%25'%20width='160%25'%20height='160%25'%3E%3CfeGaussianBlur%20stdDeviation='15.5'/%3E%3C/filter%3E%3C/defs%3E%3Cpath%20d='M70,52%20C110,28%20165,30%20192,72%20C214,104%20200,150%20165,182%20C140,205%2095,210%2072,188%20C44,166%2040,110%2055,78%20C60,64%2062,58%2070,52%20Z'%20fill='%23000'%20filter='url(%23f)'/%3E%3C/svg%3E");
+    -webkit-mask-size: 100% 100%;
+    mask-size: 100% 100%;
+    -webkit-mask-repeat: no-repeat;
+    mask-repeat: no-repeat;
+  }
+
+  .hero-portrait::before {
+    content: '';
+    position: absolute;
+    inset: -8%;
+    z-index: 0;
+    background: url("/portrait.webp") center 30% / cover;
+    filter: blur(22px) saturate(0.8) brightness(1.08);
+    transform: scale(1.15);
+  }
+
+  .hero-portrait img {
+    position: relative;
+    z-index: 1;
+    width: 100%;
+    height: 100%;
+    object-fit: contain;
+    object-position: 50% 50%;
+    transform: scale(1.34) translateY(2%);
+    filter: saturate(0.92) contrast(1.02);
+  }
+
+  @media (max-width: 900px) {
+    .hero-section {
+      flex-direction: column-reverse;
+      justify-content: center;
+      text-align: center;
+      gap: 2.5rem;
+      padding: 7rem 8% 3rem;
+    }
+    .hero-text {
+      transform: none;
+      max-width: 100%;
+    }
+    .greeting,
+    .hero-description {
+      margin-left: 0;
+    }
+    .hero-portrait {
+      transform: none;
+      width: clamp(180px, 56vw, 300px);
+    }
   }
 </style>
