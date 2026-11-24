@@ -2,7 +2,7 @@
 title: "Predict 3D printer failures in real-time using sensor data"
 category: tutorial
 date: 2024-02-03
-projectUrl: "https://quix.io/blog/build-deploy-predictive-maintenance-app"
+projectUrl: "/portfolio/article-copies/build-deploy-predictive-maintenance-app/"
 imageSrc: "/images/portfolio/aa995dd3_26c67555_6572d5ccf3e6089c6d3487f6_blog_cover_pred__mockup2-p-800.png"
 imageAlt: "Predict 3D printer failures in real-time using sensor data"
 ---

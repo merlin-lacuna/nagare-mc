@@ -2,7 +2,7 @@
 title: "Kinesis vs Kafka - A comparison of streaming data platforms (Quix)"
 category: comparison
 date: 2023-09-07
-projectUrl: "https://www.quix.io/blog/kafka-kinesis-comparison"
+projectUrl: "/portfolio/article-copies/kafka-kinesis-comparison/"
 imageSrc: "/images/portfolio/aa995dd3_b1426dd8_kakin.png"
 imageAlt: "Kinesis vs Kafka - A comparison of streaming data platforms (Quix)"
 ---

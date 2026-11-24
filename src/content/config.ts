@@ -18,7 +18,8 @@ const portfolio = defineCollection({
     date: z.coerce.date().optional(),
     timeframe: z.string().optional(),
     githubUrl: z.string().url().optional(),
-    projectUrl: z.string().url().optional(),
+    // A full URL, or a path on this site such as /portfolio/article-copies/<slug>/
+    projectUrl: z.union([z.string().url(), z.string().startsWith("/")]).optional(),
     techStack: z.array(z.string()).optional(),
     imageSrc: z.string().optional(),
     imageAlt: z.string().optional(),

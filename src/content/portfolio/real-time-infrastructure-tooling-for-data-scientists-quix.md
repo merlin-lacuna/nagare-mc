@@ -2,7 +2,7 @@
 title: "Real-time infrastructure tooling for data scientists (Quix)"
 category: opinion
 date: 2023-09-09
-projectUrl: "https://quix.io/blog/real-time-infrastructure-tooling-data-scientists"
+projectUrl: "/portfolio/article-copies/real-time-infrastructure-tooling-data-scientists/"
 imageSrc: "/images/portfolio/aa995dd3_ba64a6f8_64b4da9d1f3e7b73f25256da_Real-time-infrastructure-tooling-p-500.png"
 imageAlt: "Real-time infrastructure tooling for data scientists (Quix)"
 ---

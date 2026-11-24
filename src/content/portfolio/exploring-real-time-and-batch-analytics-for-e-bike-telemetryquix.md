@@ -2,7 +2,7 @@
 title: "Exploring real-time and batch analytics for e-bike telemetry…(Quix)"
 category: case-study
 date: 2023-09-09
-projectUrl: "https://quix.io/blog/real-time-batch-analytics-connected-bikes-quix-aws"
+projectUrl: "/portfolio/article-copies/real-time-batch-analytics-connected-bikes-quix-aws/"
 imageSrc: "/images/portfolio/aa995dd3_accc886c_QuixAWS.png"
 imageAlt: "Exploring real-time and batch analytics for e-bike telemetry…(Quix)"
 ---

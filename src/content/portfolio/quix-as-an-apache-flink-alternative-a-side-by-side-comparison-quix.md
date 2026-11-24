@@ -2,7 +2,7 @@
 title: "Quix as an Apache Flink alternative a side-by-side comparison (Quix)"
 category: comparison
 date: 2023-09-07
-projectUrl: "https://quix.io/blog/quix-vs-flink-comparison"
+projectUrl: "/portfolio/article-copies/quix-vs-flink-comparison/"
 imageSrc: "/images/portfolio/aa995dd3_3e9635ce_qflink.png"
 imageAlt: "Quix as an Apache Flink alternative a side-by-side comparison (Quix)"
 ---

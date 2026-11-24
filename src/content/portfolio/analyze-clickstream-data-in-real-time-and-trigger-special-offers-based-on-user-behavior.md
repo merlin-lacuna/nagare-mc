@@ -2,7 +2,7 @@
 title: "Analyze clickstream data in real time and trigger special offers based on user behavior"
 category: tutorial
 date: 2024-02-03
-projectUrl: "https://quix.io/blog/build-deploy-predictive-maintenance-app"
+projectUrl: "/portfolio/article-copies/analyze-clickstream-data-real-time-trigger-events/"
 imageSrc: "/images/portfolio/aa995dd3_012f4fb9_6567784dee565192dc46a67f_Clickstream_mockup.jpg"
 imageAlt: "Analyze clickstream data in real time and trigger special offers based on user behavior"
 ---
