@@ -242,3 +242,24 @@ Clear-DnsClientCache    # in PowerShell
 hcloud server list
 hcloud firewall describe firewall-1
 ```
+
+## Archived article copies
+
+The portfolio links to archived copies of articles in `public/portfolio/article-copies/<slug>/`.
+Each copy has a Merlin Carter banner (`index.html`) and the archived article (`snapshot.html`).
+All copies share their stylesheets, images, fonts and scripts in `_assets/`.
+
+The scripts that build the copies are in `tools/article-copies/`:
+
+1. `python -X utf8 make_snapshot_page.py <article-url> [--timestamp YYYYMMDDhhmmss] [--slug NAME]`
+   gets the article from the Wayback Machine and writes `out/<slug>/`.
+2. `python -X utf8 localize_assets.py <slug>` downloads the files of the article into `out/_assets/`
+   and changes the article to load them from this site.
+   The script prints how many files it could not find. Use a copy only when this number is 0.
+3. `python -X utf8 medium_images.py` gets Project A images from the original Medium posts.
+   It reads `medium_todo.json` and `medium_ids.json`. Run `localize_assets.py` again afterwards.
+4. Copy `out/<slug>/` and the contents of `out/_assets/` (without `_index.json`) into
+   `public/portfolio/article-copies/`, set `projectUrl: "/portfolio/article-copies/<slug>/"`
+   in the portfolio entry, then build and deploy.
+
+The `out/` folder is not in git.

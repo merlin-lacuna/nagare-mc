@@ -24,3 +24,6 @@ pnpm-debug.log*
 .idea/
 
 TODO.md
+# article copy build output (copied into public/portfolio/article-copies)
+tools/article-copies/out/
+__pycache__/
