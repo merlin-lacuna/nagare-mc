@@ -119,12 +119,12 @@ Inbound rules currently allowed:
 
 | Port | Source | Description |
 |---|---|---|
-| 22 | `92.116.228.251/32` | SSH (Merlin home IP) |
+| 22 | 0.0.0.0/0, ::/0 | SSH (open, key auth) |
 | 80 | 0.0.0.0/0, ::/0 | HTTP |
 | 443 | 0.0.0.0/0, ::/0 | HTTPS |
 | 3000 | 0.0.0.0/0, ::/0 | Arcane Docker UI |
 
-Note: the user's home ISP may issue a dynamic IP. If SSH stops working from their machine, get current IP (`curl -s https://api.ipify.org`) and update rule 22 via `hcloud firewall delete-rule` + `add-rule`. Or open 22 to the world and rely on key-only auth (default config).
+SSH was originally locked to Merlin's home IP `92.116.228.251/32`, but he switches networks (travels, mobile tethering, CGNAT) frequently enough that single-IP whitelisting kept breaking. Opened to the world 2026-06-22; password auth is disabled on the box so key-only auth is the gate. To re-lock at any point: `hcloud firewall replace-rules firewall-1 --rules-file <new rules>`.
 
 `hcloud` CLI: context is `linkedout`. Skill `hcloud-cli` is registered globally (junction at `~/.claude/skills/hcloud-cli/`).
 
@@ -207,12 +207,9 @@ docker compose down -v       # -v removes volumes (n8n_data, pb_data)
 
 There's also a commented-out ngrok service in their compose — irrelevant.
 
-### 3. Dynamic IP rule for SSH
+### 3. ~~Dynamic IP rule for SSH~~ (resolved 2026-06-22)
 
-Rule 22 currently locked to `92.116.228.251` (Merlin's home IP at time of setup). If ISP rotates the IP, SSH breaks. Options when this happens:
-- Manual: update the rule with the new IP
-- Cleanup: switch to `0.0.0.0/0` and rely on SSH key auth (still secure)
-- Fancy: write a hcloud-cli script that updates the rule from the current public IP
+Resolved by opening port 22 to `0.0.0.0/0` — Merlin is travelling and switching networks too often for IP-pinning to be practical. SSH key-only auth is the security gate. If you want to tighten this later (e.g. back home on a stable IP), use `hcloud firewall replace-rules` with a narrower CIDR.
 
 ## Gotchas Discovered
 
