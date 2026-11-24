@@ -2,7 +2,7 @@
 title: "How we set up a production CI workflow with GitHub actions (Project A)"
 category: best-practice
 date: 2023-09-09
-projectUrl: "https://insights.project-a.com/how-we-set-up-a-production-ci-workflow-with-github-actions/"
+projectUrl: "/portfolio/article-copies/how-we-set-up-a-production-ci-workflow-with-github-actions/"
 imageSrc: "/images/portfolio/aa995dd3_fecf8f08_188vjm9hbr3zelzjvkc8tug_1_.jpg"
 imageAlt: "How we set up a production CI workflow with GitHub actions (Project A)"
 ---

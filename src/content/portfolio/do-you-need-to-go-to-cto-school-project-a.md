@@ -2,7 +2,7 @@
 title: "Do you need to go to CTO School? (Project A)"
 category: best-practice
 date: 2023-09-09
-projectUrl: "https://insights.project-a.com/do-you-need-to-go-to-cto-school/"
+projectUrl: "/portfolio/article-copies/do-you-need-to-go-to-cto-school/"
 imageSrc: "/images/portfolio/aa995dd3_d42208ed_2a42b-1olya4-yxoqichcqdjwavfw-1-2_1_.png"
 imageAlt: "Do you need to go to CTO School? (Project A)"
 ---

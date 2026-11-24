@@ -2,7 +2,7 @@
 title: "Post-mortems don’t have to be painful (Project A)"
 category: best-practice
 date: 2023-09-09
-projectUrl: "https://insights.project-a.com/post-mortems-dont-have-to-be-painful/"
+projectUrl: "/portfolio/article-copies/post-mortems-dont-have-to-be-painful/"
 imageSrc: "/images/portfolio/aa995dd3_ef7b4a61_3a59d-17mgz1lfsho07p6-ctyd2nw-1-1_1_.png"
 imageAlt: "Post-mortems don’t have to be painful (Project A)"
 ---

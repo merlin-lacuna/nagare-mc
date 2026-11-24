@@ -2,7 +2,7 @@
 title: "Agile for Startups Use Scrum as a toolbox, not a doctrine – Project A Insights (Project A)"
 category: opinion
 date: 2023-09-09
-projectUrl: "https://insights.project-a.com/agile-for-startups-use-scrum-as-a-toolbox-not-a-doctrine/"
+projectUrl: "/portfolio/article-copies/agile-for-startups-use-scrum-as-a-toolbox-not-a-doctrine/"
 imageSrc: "/images/portfolio/aa995dd3_4bb3533d_1_rfrr40rt3b8hzgiytye8vw_1_.png"
 imageAlt: "Agile for Startups Use Scrum as a toolbox, not a doctrine – Project A Insights (Project A)"
 ---

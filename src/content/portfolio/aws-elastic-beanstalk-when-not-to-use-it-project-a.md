@@ -2,7 +2,7 @@
 title: "AWS Elastic Beanstalk when NOT to use it (Project A)"
 category: best-practice
 date: 2023-09-09
-projectUrl: "https://insights.project-a.com/aws-elastic-beanstalk-when-not-to-use-it/"
+projectUrl: "/portfolio/article-copies/aws-elastic-beanstalk-when-not-to-use-it/"
 imageSrc: "/images/portfolio/aa995dd3_bcc173a7_Avoid-AWS-Elastic-Beanstalk-jpg.png"
 imageAlt: "AWS Elastic Beanstalk when NOT to use it (Project A)"
 ---

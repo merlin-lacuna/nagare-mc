@@ -2,7 +2,7 @@
 title: "What’s the next career step for a senior developer (Project A)"
 category: best-practice
 date: 2023-09-09
-projectUrl: "https://insights.project-a.com/whats-the-next-career-step-for-a-senior-developer/"
+projectUrl: "/portfolio/article-copies/whats-the-next-career-step-for-a-senior-developer/"
 imageSrc: "/images/portfolio/aa995dd3_b277d28b_32d71-1soxgtvoi38bsangmlbodqq-1-1_1_.png"
 imageAlt: "What’s the next career step for a senior developer (Project A)"
 ---

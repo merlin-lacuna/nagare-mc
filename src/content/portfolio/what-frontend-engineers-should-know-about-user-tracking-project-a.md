@@ -2,7 +2,7 @@
 title: "What frontend engineers should know about user tracking (Project A)"
 category: best-practice
 date: 2023-09-09
-projectUrl: "https://insights.project-a.com/what-front-end-engineers-should-know-about-user-tracking/"
+projectUrl: "/portfolio/article-copies/what-front-end-engineers-should-know-about-user-tracking/"
 imageSrc: "/images/portfolio/aa995dd3_25ccb3b0_6a166-1mbs9gvpbq1um842dtbsyaq-1_1_.png"
 imageAlt: "What frontend engineers should know about user tracking (Project A)"
 ---

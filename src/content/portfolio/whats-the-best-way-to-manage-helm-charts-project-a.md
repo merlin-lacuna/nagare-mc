@@ -2,7 +2,7 @@
 title: "What’s the best way to manage Helm charts (Project A)"
 category: best-practice
 date: 2023-09-09
-projectUrl: "https://insights.project-a.com/whats-the-best-way-to-manage-helm-charts/"
+projectUrl: "/portfolio/article-copies/whats-the-best-way-to-manage-helm-charts/"
 imageSrc: "/images/portfolio/aa995dd3_b1678cb3_1wcnvamqiqbsv0nymgfbo3a_1_.jpg"
 imageAlt: "What’s the best way to manage Helm charts (Project A)"
 ---

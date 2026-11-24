@@ -2,7 +2,7 @@
 title: "What should startups consider when outsourcing engineering work (Project A)"
 category: best-practice
 date: 2023-09-09
-projectUrl: "https://insights.project-a.com/what-should-startups-consider-when-outsourcing-engineering-work/"
+projectUrl: "/portfolio/article-copies/what-should-startups-consider-when-outsourcing-engineering-work/"
 imageSrc: "/images/portfolio/aa995dd3_f32195e6_d2bda-1xczegr5csvretulapgnbpg-1-1_1_.png"
 imageAlt: "What should startups consider when outsourcing engineering work (Project A)"
 ---

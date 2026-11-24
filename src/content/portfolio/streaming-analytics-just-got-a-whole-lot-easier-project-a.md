@@ -2,7 +2,7 @@
 title: "Streaming analytics just got a whole lot easier (Project A)"
 category: tutorial
 date: 2023-09-09
-projectUrl: "https://web.archive.org/web/20240423055743/https://insights.project-a.com/streaming-analytics-just-got-a-whole-lot-easier/"
+projectUrl: "/portfolio/article-copies/streaming-analytics-just-got-a-whole-lot-easier/"
 imageSrc: "/images/portfolio/aa995dd3_5a164c43_44b10-1ocdm88wmqjmm_dwxoxbyww-3_1_.png"
 imageAlt: "Streaming analytics just got a whole lot easier (Project A)"
 ---

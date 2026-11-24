@@ -2,7 +2,7 @@
 title: "To roll back or not to roll back How to handle critical incidents in production (Project A)"
 category: best-practice
 date: 2023-09-09
-projectUrl: "https://insights.project-a.com/to-roll-back-or-not-to-roll-back-how-to-handle-critical-incidents-in-production/"
+projectUrl: "/portfolio/article-copies/to-roll-back-or-not-to-roll-back-how-to-handle-critical-incidents-in-production/"
 imageSrc: "/images/portfolio/aa995dd3_090022b1_68fdd-1pidm9qxdlssidxg-tufiza-1-2_1_.png"
 imageAlt: "To roll back or not to roll back How to handle critical incidents in production (Project A)"
 ---

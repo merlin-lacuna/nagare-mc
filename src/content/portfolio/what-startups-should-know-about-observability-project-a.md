@@ -2,7 +2,7 @@
 title: "What startups should know about observability (Project A)"
 category: best-practice
 date: 2023-09-09
-projectUrl: "https://insights.project-a.com/what-startups-should-know-about-observability/"
+projectUrl: "/portfolio/article-copies/what-startups-should-know-about-observability/"
 imageSrc: "/images/portfolio/aa995dd3_1a6e7d2e_11844-1osyyjnusxdw6ct-wavgabw-1-1_1_.png"
 imageAlt: "What startups should know about observability (Project A)"
 ---
