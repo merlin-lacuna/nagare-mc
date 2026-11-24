@@ -2,7 +2,7 @@
 title: "Building and Scaling a Web3 Developer Community (Chainlink)"
 category: opinion
 date: 2023-09-09
-projectUrl: "https://blog.chain.link/building-and-scaling-a-web3-developer-community/"
+projectUrl: "/portfolio/article-copies/building-and-scaling-a-web3-developer-community/"
 imageSrc: "/images/portfolio/aa995dd3_dfe51f50_sddefault-devweb3.jpg"
 imageAlt: "Building and Scaling a Web3 Developer Community (Chainlink)"
 ---

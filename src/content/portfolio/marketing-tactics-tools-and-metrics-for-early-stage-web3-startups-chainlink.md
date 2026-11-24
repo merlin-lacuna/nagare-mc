@@ -2,7 +2,7 @@
 title: "Marketing Tactics, Tools, and Metrics for Early-Stage Web3 Startups (Chainlink)"
 category: opinion
 date: 2023-09-09
-projectUrl: "https://blog.chain.link/web3-marketing-tactics-tools-metrics/"
+projectUrl: "/portfolio/article-copies/web3-marketing-tactics-tools-metrics/"
 imageSrc: "/images/portfolio/aa995dd3_2d1c498c_sddefault_1_.jpg"
 imageAlt: "Marketing Tactics, Tools, and Metrics for Early-Stage Web3 Startups (Chainlink)"
 ---

@@ -2,7 +2,7 @@
 title: "Early-Stage Web3 Startup Funding An Introduction (Chainlink)"
 category: opinion
 date: 2023-09-09
-projectUrl: "https://blog.chain.link/early-stage-web3-startup-funding-an-introduction/"
+projectUrl: "/portfolio/article-copies/early-stage-web3-startup-funding-an-introduction/"
 imageSrc: "/images/portfolio/aa995dd3_ebcb698a_sddefault_1_.jpg"
 imageAlt: "Early-Stage Web3 Startup Funding An Introduction (Chainlink)"
 ---
